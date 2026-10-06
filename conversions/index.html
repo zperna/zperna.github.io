@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Climate-Resilient Conversions</title>
+<meta name="description" content="A free field guide for replacing high-maintenance hedges and failing trees with climate-resilient species in the southern Willamette Valley, Oregon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bitter:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#EDEFEA; --paper:#F8F9F6; --ink:#1F2522; --muted:#57605A; --rule:#C6CBC4;
+  --gley:#5B7A72; --silt:#4E4233; --jory:#8F442B;
+  --leaf:#2D6A3D; --leaf-tint:#DCEADF; --amber:#8F6210; --amber-tint:#F3E7CB;
+  --alert:#A0352A; --alert-tint:#F5DCD7; --on-leaf:#FFFFFF;
+  --serif:"Bitter", Georgia, serif; --sans:"Atkinson Hyperlegible", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#141816; --paper:#1C211E; --ink:#E4E8E3; --muted:#A3ACA5; --rule:#343C37;
+    --gley:#8DAEA5; --silt:#C2A988; --jory:#DA8A63;
+    --leaf:#7DBB8C; --leaf-tint:#22392A; --amber:#E2B357; --amber-tint:#3A3020;
+    --alert:#EC8a78; --alert-tint:#3E2521; --on-leaf:#10170F;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#141816; --paper:#1C211E; --ink:#E4E8E3; --muted:#A3ACA5; --rule:#343C37;
+  --gley:#8DAEA5; --silt:#C2A988; --jory:#DA8A63;
+  --leaf:#7DBB8C; --leaf-tint:#22392A; --amber:#E2B357; --amber-tint:#3A3020;
+  --alert:#EC8a78; --alert-tint:#3E2521; --on-leaf:#10170F;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.55 var(--sans)}
+a{color:var(--leaf);text-underline-offset:2px}
+:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0 0 .5em}
+h1{font-size:2.05rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.4rem;font-weight:700;margin-top:2.2rem}
+h3{font-size:1.1rem;font-weight:600;margin-top:1.4rem}
+h1:focus{outline:none}
+p{margin:0 0 1em;max-width:68ch}
+em.sci,.sci{font-style:italic}
+.muted{color:var(--muted)}
+small,.small{font-size:.85rem}
+
+/* ---------- shell ---------- */
+.shell{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh}
+.rail{position:sticky;top:0;height:100vh;overflow:auto;padding:24px 18px;border-right:1px solid var(--rule);background:var(--paper)}
+.brand{display:block;font-family:var(--serif);font-weight:700;font-size:1.05rem;line-height:1.25;color:var(--ink);text-decoration:none;margin-bottom:22px}
+.brand span{display:block;font-family:var(--sans);font-weight:400;font-size:.82rem;color:var(--muted);margin-top:4px}
+.rail h2{font-family:var(--sans);font-size:.82rem;font-weight:700;color:var(--muted);margin:20px 0 6px}
+.rail ul{list-style:none;margin:0;padding:0}
+.rail a.nav{display:block;padding:6px 10px;margin:1px 0;border-radius:4px;color:var(--ink);text-decoration:none}
+.rail a.nav:hover{background:var(--ground)}
+.rail a.nav[aria-current="page"]{background:var(--leaf-tint);color:var(--ink);font-weight:700;box-shadow:inset 3px 0 0 var(--leaf)}
+.rail .back{display:inline-block;margin-top:26px;font-size:.88rem}
+main{padding:40px 48px 80px;max-width:980px}
+footer{border-top:1px solid var(--rule);margin-top:56px;padding-top:16px;color:var(--muted);font-size:.85rem}
+.lede{font-size:1.12rem;max-width:62ch}
+
+/* ---------- forms ---------- */
+.form{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px 18px;margin:18px 0 8px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field > span{font-weight:700;font-size:.9rem}
+.field small{color:var(--muted)}
+input[type=number],input[type=date],input[type=text],input[type=search],select{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:7px 9px;min-height:40px;width:100%}
+input[type=range]{width:100%;accent-color:var(--leaf)}
+.check{display:flex;align-items:center;gap:8px;font-weight:400}
+.check input{width:18px;height:18px;accent-color:var(--leaf)}
+fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:5px}
+legend{font-weight:700;font-size:.9rem;padding:0;margin-bottom:5px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg label{display:flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:4px;padding:6px 10px;background:var(--paper);cursor:pointer}
+.seg input{accent-color:var(--leaf)}
+.btn{font:inherit;font-weight:700;border:1px solid var(--leaf);background:var(--leaf);color:var(--on-leaf);padding:8px 14px;border-radius:4px;cursor:pointer;min-height:40px}
+.btn.quiet{background:transparent;color:var(--leaf)}
+.btn.small{padding:4px 10px;min-height:32px;font-size:.88rem}
+.row-actions{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+
+/* ---------- panels and tables ---------- */
+.panel{background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--leaf);padding:16px 18px;margin:16px 0;border-radius:2px}
+.panel.g1{border-left-color:var(--gley)} .panel.g2{border-left-color:var(--silt)} .panel.g3{border-left-color:var(--jory)}
+.panel.caution{border-left-color:var(--amber)} .panel.alert{border-left-color:var(--alert)}
+.panel > :last-child{margin-bottom:0}
+.result-title{font-family:var(--serif);font-size:1.45rem;font-weight:700;margin:0 0 .35em}
+dl.facts{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:8px 18px;margin:0}
+dl.facts dt{font-weight:700}
+dl.facts dd{margin:0;max-width:66ch}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.95rem;background:var(--paper)}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:.85rem;color:var(--muted);font-weight:700}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.table-wrap{overflow-x:auto}
+.badge{display:inline-block;font-size:.8rem;font-weight:700;padding:1px 8px;border-radius:3px;border:1px solid currentColor;white-space:nowrap}
+.badge.A,.badge.Yes{color:var(--leaf)}
+.badge.B,.badge.Caution,.badge.Pre-emptive{color:var(--amber)}
+.badge.C,.badge.Reject,.badge.No{color:var(--alert)}
+.badge.gleyc{color:var(--gley)}
+.badge.alertc{color:var(--alert)}
+.badge.amberc{color:var(--amber)}
+.badge.fill-A{background:var(--leaf-tint)} .badge.fill-B{background:var(--amber-tint)}
+details{border-bottom:1px solid var(--rule)}
+details > summary{cursor:pointer;padding:10px 4px;list-style:none}
+details > summary::-webkit-details-marker{display:none}
+details > summary::before{content:"+";display:inline-block;width:1.2em;font-weight:700;color:var(--leaf)}
+details[open] > summary::before{content:"\2212"}
+details .body{padding:4px 4px 16px 1.6em}
+ol.steps{padding-left:1.4em;margin:.4em 0 1em}
+ol.steps li{margin:.35em 0;max-width:68ch}
+ul.plain{padding-left:1.2em;margin:.4em 0 1em}
+ul.plain li{margin:.3em 0;max-width:68ch}
+
+/* ---------- species list ---------- */
+.sp-head{display:grid;grid-template-columns:minmax(0,1.6fr) 60px 140px 110px;gap:12px;align-items:center}
+.sp-name b{display:block}
+.fitchips{display:flex;gap:4px}
+.chip{font-size:.75rem;font-weight:700;width:30px;text-align:center;border-radius:3px;padding:1px 0;border:1px solid var(--rule);color:var(--muted)}
+.chip.Yes{background:var(--leaf-tint);color:var(--leaf);border-color:var(--leaf)}
+.chip.Caution{background:var(--amber-tint);color:var(--amber);border-color:var(--amber)}
+.count{font-weight:700;margin:8px 0}
+.listhead{display:grid;grid-template-columns:minmax(0,1.6fr) 60px 140px 110px;gap:12px;font-size:.82rem;color:var(--muted);font-weight:700;padding:0 4px 4px 1.6em;border-bottom:1px solid var(--rule)}
+
+/* ---------- soil hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:36px;align-items:center;margin-bottom:24px}
+.profiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.profile{display:block;text-decoration:none;color:var(--ink);border-radius:3px}
+.profile svg{display:block;width:100%;height:auto;border:1px solid var(--rule)}
+.profile .soil{clip-path:inset(0 0 0 0)}
+@media (prefers-reduced-motion:no-preference){
+  .profile .soil{animation:dig 1.1s cubic-bezier(.3,.6,.2,1) both}
+  .profile:nth-child(2) .soil{animation-delay:.18s}
+  .profile:nth-child(3) .soil{animation-delay:.36s}
+}
+@keyframes dig{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+.profile b{display:block;font-family:var(--serif);font-size:1.05rem;margin-top:8px}
+.profile span{display:block;font-size:.85rem;color:var(--muted);line-height:1.35}
+.profile:hover svg{border-color:var(--ink)}
+.profile:hover b{text-decoration:underline}
+
+/* ---------- diagrams ---------- */
+figure{margin:20px 0}
+figure svg{display:block;width:100%;height:auto;color:var(--ink)}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:8px;max-width:70ch}
+.fc .box{fill:var(--paper);stroke:currentColor;stroke-width:1.2}
+.fc .q{fill:var(--ground)}
+.fc text{fill:currentColor;font:13px var(--sans)}
+.fc text.b{font-weight:700}
+.fc .edge{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.55}
+.fc .elab{font-size:12px;fill:var(--muted)}
+.fc .on .box{stroke:var(--leaf);stroke-width:2.6}
+.fc .edge.on{stroke:var(--leaf);stroke-width:2.6;opacity:1}
+.fc .r-alert{stroke:var(--alert)} .fc .r-amber{stroke:var(--amber)}
+.fc .soilg1{stroke:var(--gley);stroke-width:2.4} .fc .soilg2{stroke:var(--silt);stroke-width:2.4} .fc .soilg3{stroke:var(--jory);stroke-width:2.4}
+.fc .accent{fill:var(--leaf-tint);stroke:var(--leaf)}
+
+/* ---------- two-axis matrix ---------- */
+.matrix{display:grid;grid-template-columns:28px 92px repeat(5,minmax(0,1fr));gap:3px;font-size:.78rem;margin:16px 0}
+.matrix .cell{background:var(--paper);border:1px solid var(--rule);min-height:70px;padding:4px;display:flex;flex-wrap:wrap;gap:3px;align-content:flex-start}
+.matrix .ylab,.matrix .xlab{display:flex;align-items:center;color:var(--muted);font-weight:700}
+.matrix .xlab{justify-content:center;text-align:center;padding-top:4px}
+.matrix .yaxis{grid-row:1 / span 5;writing-mode:vertical-rl;transform:rotate(180deg);display:flex;align-items:center;justify-content:center;font-weight:700}
+.matrix .xaxis{grid-column:3 / span 5;text-align:center;font-weight:700}
+.mchip{padding:0 4px;border-radius:2px;border:1px solid var(--rule);line-height:1.5}
+.mchip.A{border-color:var(--leaf);background:var(--leaf-tint)}
+.mchip.B{border-color:var(--amber);background:var(--amber-tint)}
+.mchip.C,.mchip.Reject{border-style:dashed;border-color:var(--alert);color:var(--muted);text-decoration:line-through}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+.legend .mchip{display:inline-block;margin-right:4px}
+
+.prow{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1.3fr) 90px 90px auto;gap:10px 14px;align-items:end;padding:10px 0;border-bottom:1px solid var(--rule)}
+@media (max-width:860px){.prow{grid-template-columns:1fr 1fr}.prow .field:first-child{grid-column:1 / -1}.prow .w-del{justify-self:start}}
+/* ---------- client plan ---------- */
+.plan{background:var(--paper);border:1px solid var(--rule);padding:22px 24px;margin-top:18px}
+.plan h3{margin-top:0}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .shell{display:block}
+  .rail{position:sticky;top:0;z-index:5;height:auto;border-right:0;border-bottom:1px solid var(--rule);padding:10px 14px}
+  .brand{margin-bottom:6px;font-size:.98rem}
+  .brand span,.rail h2,.rail .back{display:none}
+  .rail nav{display:flex;overflow-x:auto;gap:4px;padding-bottom:4px}
+  .rail ul{display:flex;gap:4px}
+  .rail a.nav{white-space:nowrap;padding:6px 10px}
+  .rail a.nav[aria-current="page"]{box-shadow:inset 0 -3px 0 var(--leaf)}
+  main{padding:24px 16px 64px}
+  .hero{grid-template-columns:1fr}
+  h1{font-size:1.65rem}
+  dl.facts{grid-template-columns:1fr;gap:2px 0}
+  dl.facts dd{margin-bottom:8px}
+  .sp-head,.listhead{grid-template-columns:minmax(0,1fr) 54px}
+  .sp-head .fitchips,.sp-head .hw,.listhead .hide-s{display:none}
+  .matrix{grid-template-columns:22px 64px repeat(5,minmax(0,1fr));font-size:.68rem}
+}
+@media print{
+  .rail,.no-print,footer{display:none !important}
+  .shell{display:block}
+  main{padding:0;max-width:none}
+  body{background:#fff;color:#000}
+  .plan{border:0;padding:0}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="rail">
+  <a class="brand" href="#overview">Climate-resilient conversions<span>Southern Willamette Valley, Oregon</span></a>
+  <nav aria-label="Sections">
+    <h2>Tools</h2>
+    <ul>
+      <li><a class="nav" href="#convert">Find a replacement</a></li>
+      <li><a class="nav" href="#species">Species</a></li>
+      <li><a class="nav" href="#ash">Ash and EAB</a></li>
+      <li><a class="nav" href="#water">Watering plan</a></li>
+      <li><a class="nav" href="#hedgerow">Hedgerows</a></li>
+    </ul>
+    <h2>Background</h2>
+    <ul>
+      <li><a class="nav" href="#overview">Overview</a></li>
+      <li><a class="nav" href="#workflows">How it works</a></li>
+      <li><a class="nav" href="#framework">Framework</a></li>
+      <li><a class="nav" href="#sources">Sources</a></li>
+    </ul>
+  </nav>
+  <a class="back" href="/">Back to portfolio</a>
+</aside>
+
+<main id="main">
+
+<!-- ================= OVERVIEW ================= -->
+<section data-view="overview">
+  <div class="hero">
+    <div>
+      <h1 tabindex="-1">Replacing high-maintenance plantings with species that fit the valley's future</h1>
+      <p class="lede">A field guide for homeowners, arborists, landscapers and land managers. It matches each replacement to the soil, so the new planting survives both halves of the valley's year.</p>
+      <p>Southern Willamette Valley soils are saturated from November to April and dry from June to October. Most drought lists rate only the summer. Here, winter kills as many plants as drought does. Every species in this framework is rated on both.</p>
+      <p class="muted small">Choose a soil group to see the species that fit it.</p>
+    </div>
+    <div class="profiles" role="list">
+      <a class="profile" role="listitem" href="#species?g=1" aria-label="Group 1, valley bottom clay: see species">
+        <svg viewBox="0 0 120 220" role="img" aria-label="Soil profile: dark topsoil over grey-green gleyed clay with orange mottles and a perched winter water table">
+          <g class="soil">
+            <rect x="0" y="0" width="120" height="7" fill="#37352B"/>
+            <rect x="0" y="7" width="120" height="38" fill="#4A4A3E"/>
+            <rect x="0" y="45" width="120" height="105" fill="#6F8279"/>
+            <rect x="0" y="150" width="120" height="70" fill="#7E8B8C"/>
+            <g fill="#B5793A" opacity=".8"><circle cx="22" cy="70" r="3"/><circle cx="58" cy="88" r="2.5"/><circle cx="95" cy="64" r="3.5"/><circle cx="34" cy="118" r="2.5"/><circle cx="80" cy="128" r="3"/><circle cx="100" cy="104" r="2"/><circle cx="12" cy="140" r="2.5"/></g>
+            <line x1="0" y1="52" x2="120" y2="52" stroke="#9CC8E8" stroke-width="2" stroke-dasharray="6 4"/>
+          </g>
+        </svg>
+        <b>Group 1</b><span>Valley bottom clay. Wet all winter.</span>
+      </a>
+      <a class="profile" role="listitem" href="#species?g=2" aria-label="Group 2, alluvial silt loam: see species">
+        <svg viewBox="0 0 120 220" role="img" aria-label="Soil profile: deep dark silt loam over brown subsoil, well drained">
+          <g class="soil">
+            <rect x="0" y="0" width="120" height="7" fill="#2E271E"/>
+            <rect x="0" y="7" width="120" height="68" fill="#3F3326"/>
+            <rect x="0" y="75" width="120" height="85" fill="#66523C"/>
+            <rect x="0" y="160" width="120" height="60" fill="#8A7558"/>
+            <g fill="#2E271E" opacity=".35"><circle cx="30" cy="40" r="1.6"/><circle cx="70" cy="30" r="1.4"/><circle cx="95" cy="55" r="1.6"/><circle cx="50" cy="62" r="1.2"/></g>
+          </g>
+        </svg>
+        <b>Group 2</b><span>Alluvial silt loam. Deep and well drained.</span>
+      </a>
+      <a class="profile" role="listitem" href="#species?g=3" aria-label="Group 3, footslope and upland red clay: see species">
+        <svg viewBox="0 0 120 220" role="img" aria-label="Soil profile: thin reddish topsoil over red clay and broken bedrock near the surface">
+          <g class="soil">
+            <rect x="0" y="0" width="120" height="7" fill="#3A2419"/>
+            <rect x="0" y="7" width="120" height="36" fill="#6A3424"/>
+            <rect x="0" y="43" width="120" height="102" fill="#8E3F26"/>
+            <rect x="0" y="145" width="120" height="75" fill="#9C7F69"/>
+            <g fill="#6E5A4C"><polygon points="10,160 28,152 34,168 16,174"/><polygon points="52,170 74,163 78,182 56,186"/><polygon points="88,155 108,150 112,170 92,172"/><polygon points="20,192 42,188 44,206 22,208"/><polygon points="70,198 96,194 98,212 72,214"/></g>
+          </g>
+        </svg>
+        <b>Group 3</b><span>Footslope red clay. Shallow and dry in summer.</span>
+      </a>
+    </div>
+  </div>
+
+  <h2>What you can do here</h2>
+  <ul class="plain">
+    <li><a href="#convert">Find a replacement</a> for a laurel, boxwood, arborvitae, photinia, birch, Bradford pear, flowering plum or ash.</li>
+    <li><a href="#species">Filter the species list</a> by soil group, height, overhead wires and water needs.</li>
+    <li><a href="#ash">Decide what to do with an ash tree</a> before emerald ash borer arrives: treat, plant a successor first, or replace.</li>
+    <li><a href="#water">Build a watering plan</a> for the first three summers and print it.</li>
+    <li><a href="#hedgerow">Plan a mixed hedgerow</a> and count the plants.</li>
+  </ul>
+
+  <h2>How to use it</h2>
+  <p>Start with the plant you want to replace and the soil it grows in. Choose a replacement that fits that soil, water it for three summers, then stop. Keep a simple record of what you plant and how it does each year. The ratings here are a starting point; real results should correct them. <a href="#workflows">See the full process.</a></p>
+
+  <h2>Three rules that shape every recommendation</h2>
+  <ol class="steps">
+    <li><b>Start with the soil.</b> A plant that is perfect for a dry slope dies in valley clay by February.</li>
+    <li><b>Replace what needs replacing.</b> A healthy tree that causes no problems is usually worth keeping.</li>
+    <li><b>Water the first three summers, then stop.</b> Survival is decided during establishment, not at planting.</li>
+  </ol>
+</section>
+
+<!-- ================= CONVERT ================= -->
+<section data-view="convert" hidden>
+  <h1 tabindex="-1">Find a replacement</h1>
+  <p>Choose the plant you want to replace and the soil group. The result shows why it fails or costs so much, what can replace it, and which candidates fit that soil.</p>
+  <div class="form">
+    <label class="field"><span>Plant to replace</span><select id="cv-legacy"></select></label>
+    <label class="field"><span>Soil group</span>
+      <select id="cv-soil"><option value="1">Group 1: valley bottom clay</option><option value="2" selected>Group 2: alluvial silt loam</option><option value="3">Group 3: footslope red clay</option></select>
+      <small><a href="#framework-soil">How to call the soil group</a></small>
+    </label>
+  </div>
+  <div id="cv-out" aria-live="polite"></div>
+</section>
+
+<!-- ================= SPECIES ================= -->
+<section data-view="species" hidden>
+  <h1 tabindex="-1">Species</h1>
+  <p>Every species is rated for summer drought and for winter-wet clay. Tier A is proven in the valley. Tier B is a trial: keep it to 10% of any planting.</p>
+  <div class="form">
+    <label class="field"><span>Soil group</span>
+      <select id="sp-soil"><option value="">Any</option><option value="1">Group 1: valley bottom clay</option><option value="2">Group 2: alluvial silt loam</option><option value="3">Group 3: footslope red clay</option></select>
+    </label>
+    <label class="field"><span>Mature height up to (ft)</span><input id="sp-height" type="number" min="0" step="5" placeholder="Any"></label>
+    <label class="field"><span>Water class</span>
+      <select id="sp-water"><option value="">Any</option><option>Standard</option><option>Drought-adapted</option></select>
+    </label>
+    <label class="field"><span>Search</span><input id="sp-search" type="search" placeholder="Name or genus"></label>
+  </div>
+  <div class="form" style="margin-top:0">
+    <fieldset><legend>Tiers shown</legend>
+      <div class="seg">
+        <label><input type="checkbox" class="sp-tier" value="A" checked> A</label>
+        <label><input type="checkbox" class="sp-tier" value="B" checked> B</label>
+        <label><input type="checkbox" class="sp-tier" value="C"> C and Reject</label>
+      </div>
+    </fieldset>
+    <fieldset><legend>Options</legend>
+      <label class="check"><input type="checkbox" id="sp-caution"> Include "Caution" soil fits</label>
+      <label class="check"><input type="checkbox" id="sp-wires"> Safe under overhead wires</label>
+    </fieldset>
+  </div>
+  <p class="count" id="sp-count" aria-live="polite"></p>
+  <div class="listhead"><span>Species</span><span>Tier</span><span class="hide-s">Soil fit (1, 2, 3)</span><span class="hide-s">Height x width (ft)</span></div>
+  <div id="sp-list"></div>
+</section>
+
+<!-- ================= ASH ================= -->
+<section data-view="ash" hidden>
+  <h1 tabindex="-1">Ash and emerald ash borer</h1>
+  <div class="panel caution">
+    <p><b>Status, checked October 2026.</b> Emerald ash borer (EAB) is confirmed in Clackamas, Marion, Multnomah, Washington and Yamhill counties, as close as Salem and Silverton. It is not confirmed in Lane County as of August 2026 reports. Ash here can still be protected before the beetle arrives, when treatment works best. <a href="https://www.oregon.gov/oda/ippm/survey-treatment/pages/emerald-ash-borer.aspx">Check the ODA page</a> for the current status.</p>
+  </div>
+  <p>Assess one tree at a time. The decision follows the path highlighted in the chart.</p>
+
+  <div class="form">
+    <label class="field"><span>Trunk diameter, DBH (in)</span><input id="ash-dbh" type="number" min="1" max="80" value="18"></label>
+    <label class="field"><span>Canopy dieback: <output id="ash-die-out">10%</output></span><input id="ash-die" type="range" min="0" max="100" step="5" value="10"></label>
+    <fieldset><legend>EAB signs present?</legend>
+      <div class="seg"><label><input type="radio" name="ash-signs" value="N" checked> No</label><label><input type="radio" name="ash-signs" value="Y"> Yes</label></div>
+    </fieldset>
+    <label class="field"><span>Tree value</span><select id="ash-value"><option>High</option><option selected>Medium</option><option>Low</option></select></label>
+    <label class="field"><span>Site type</span><select id="ash-site"><option>Upland</option><option selected>Wet</option><option>Riparian</option></select></label>
+    <fieldset><legend>Near a target?</legend>
+      <label class="check"><input type="checkbox" id="ash-target"> House, road or play area</label>
+    </fieldset>
+  </div>
+
+  <figure>
+    <svg class="fc" id="ash-flow" viewBox="0 0 850 350" role="img" aria-label="Ash decision tree: canopy dieback over 50 percent means remove now; 30 to 50 percent means assess structure; under 30 percent, high-value trees are treated; others with EAB signs are removed and replaced; others without signs get a successor planted first.">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+      <g id="n-q1"><rect class="box q" x="10" y="148" width="140" height="44" rx="4"/><text class="b" x="80" y="175" text-anchor="middle">Canopy dieback?</text></g>
+      <g id="n-r1"><rect class="box r-alert" x="250" y="20" width="160" height="44" rx="4"/><text class="b" x="330" y="47" text-anchor="middle">Remove now</text></g>
+      <g id="n-r2"><rect class="box r-amber" x="250" y="90" width="160" height="44" rx="4"/><text class="b" x="330" y="117" text-anchor="middle">Gray zone: assess</text></g>
+      <g id="n-q2"><rect class="box q" x="250" y="228" width="160" height="44" rx="4"/><text class="b" x="330" y="255" text-anchor="middle">High value?</text></g>
+      <g id="n-r3"><rect class="box" x="470" y="190" width="130" height="44" rx="4"/><text class="b" x="535" y="217" text-anchor="middle">Treat</text></g>
+      <g id="n-q3"><rect class="box q" x="470" y="270" width="130" height="44" rx="4"/><text class="b" x="535" y="297" text-anchor="middle">EAB signs?</text></g>
+      <g id="n-r4"><rect class="box" x="650" y="240" width="195" height="44" rx="4"/><text class="b" x="747" y="267" text-anchor="middle">Remove and replace</text></g>
+      <g id="n-r5"><rect class="box" x="650" y="300" width="195" height="44" rx="4"/><text class="b" x="747" y="327" text-anchor="middle">Plant first, remove later</text></g>
+      <path id="e-1" class="edge" d="M150 170 H165 V42 H246" marker-end="url(#ah)"/><text class="elab" x="172" y="36">over 50%</text>
+      <path id="e-2" class="edge" d="M150 170 H165 V112 H246" marker-end="url(#ah)"/><text class="elab" x="172" y="106">30–50%</text>
+      <path id="e-3" class="edge" d="M150 170 H165 V250 H246" marker-end="url(#ah)"/><text class="elab" x="172" y="244">under 30%</text>
+      <path id="e-4" class="edge" d="M410 250 H425 V212 H466" marker-end="url(#ah)"/><text class="elab" x="432" y="206">yes</text>
+      <path id="e-5" class="edge" d="M410 250 H425 V292 H466" marker-end="url(#ah)"/><text class="elab" x="432" y="286">no</text>
+      <path id="e-6" class="edge" d="M600 292 H612 V262 H646" marker-end="url(#ah)"/><text class="elab" x="618" y="256">yes</text>
+      <path id="e-7" class="edge" d="M600 292 H612 V322 H646" marker-end="url(#ah)"/><text class="elab" x="618" y="316">no</text>
+    </svg>
+    <figcaption>The highlighted path is the decision for the tree entered above. A tree near a target that reaches "Remove now" goes to the top of the schedule.</figcaption>
+  </figure>
+
+  <div id="ash-out" aria-live="polite"></div>
+
+  <details class="no-print">
+    <summary><b>Prices used in the costs</b> <span class="muted small">Example prices. Change them to local prices.</span></summary>
+    <div class="body">
+      <div class="form">
+        <label class="field"><span>Injection ($ per inch DBH)</span><input id="p-inj" type="number" min="0" value="12"><small>Published range about $7–16.</small></label>
+        <label class="field"><span>Retreat every (years)</span><input id="p-int" type="number" min="1" max="3" step="0.5" value="2"></label>
+        <label class="field"><span>Planned removal ($ per inch DBH)</span><input id="p-rem" type="number" min="0" value="80"></label>
+        <label class="field"><span>Emergency multiplier</span><input id="p-mult" type="number" min="1" step="0.1" value="1.5"><small>Dead ash needs a lift or crane.</small></label>
+        <label class="field"><span>Replacement tree, installed ($)</span><input id="p-rep" type="number" min="0" value="1350"><small>Includes 3 years of establishment care.</small></label>
+        <label class="field"><span>Horizon (years)</span><input id="p-hz" type="number" min="1" value="15"></label>
+      </div>
+    </div>
+  </details>
+
+  <h2>Field guidance</h2>
+  <details><summary><b>EAB signs to check</b></summary><div class="body"><ul class="plain">
+    <li>D-shaped exit holes, about 1/8 in wide.</li>
+    <li>Woodpecker damage: patches of light, flaked bark.</li>
+    <li>Vertical bark splits with S-shaped tunnels underneath.</li>
+    <li>Sprouts on the trunk or at the base.</li>
+    <li>Crown thinning from the top down.</li>
+  </ul><p>A suspected find in Lane County would be a new county record. Report it to the <a href="https://oregoninvasiveshotline.org/">Oregon Invasive Species Hotline</a> before moving any wood.</p></div></details>
+  <details><summary><b>Phased replacement: plant first, remove later</b></summary><div class="body"><ol class="steps">
+    <li>Plant the successor now, in light: outside the ash dripline or in a canopy gap.</li>
+    <li>Water it on the <a href="#water">establishment schedule</a>.</li>
+    <li>Check the ash at each visit. Record dieback and signs.</li>
+    <li>Remove the ash at 30% dieback, when EAB reaches Lane County, or when the successor gives useful shade (often year 5–8).</li>
+    <li>Remove it on your schedule. Waiting until the tree dies makes removal costlier and more dangerous.</li>
+  </ol></div></details>
+  <details><summary><b>Quarantine and wood handling</b></summary><div class="body"><ol class="steps">
+    <li>Ash, olive and white fringetree material cannot leave the five quarantined counties. This includes logs, chips, mulch, stumps, roots and branches. Hardwood firewood cannot leave either.</li>
+    <li>Never bring ash material or hardwood firewood from those counties into Lane County.</li>
+    <li>If Lane County is added, ash wood and chips must stay in the county. Plan for local disposal.</li>
+  </ol></div></details>
+  <details><summary><b>Removing dead or dying ash</b></summary><div class="body"><ul class="plain">
+    <li>EAB-killed ash turns brittle within one to two years of death. Limbs fail without warning.</li>
+    <li>Do not climb an ash with more than 50% dieback. Use a lift or crane.</li>
+  </ul></div></details>
+  <details><summary><b>Riparian and wetland sites</b></summary><div class="body">
+    <p>Oregon ash often grows in wetlands and along streams. Replace it with natives only on these sites: Pacific crabapple, native willows, Oregon white oak on drier edges, with red-osier dogwood and Pacific ninebark below. Swamp white oak is not native to Oregon. Work in wetlands and stream buffers may need permits.</p>
+  </div></details>
+  <details><summary><b>When EAB is confirmed in Lane County</b></summary><div class="body"><ol class="steps">
+    <li>Untreated ash can no longer wait. Decide on treatment or removal this season.</li>
+    <li>Treat valuable, healthy trees this season if they are not yet treated.</li>
+    <li>Re-check every recorded tree for dieback and signs.</li>
+    <li>Check for quarantine changes before moving any ash wood.</li>
+  </ol></div></details>
+</section>
+
+<!-- ================= WATER ================= -->
+<section data-view="water" hidden>
+  <h1 tabindex="-1">Watering plan</h1>
+  <p class="no-print">New plantings need water for the first three dry seasons, about June 15 to October 15. Then the water stops. Enter the site and its plants. The plan below updates and prints on one page.</p>
+
+  <div class="no-print">
+    <div class="form">
+      <label class="field"><span>Soil group</span><select id="w-soil"><option value="1">Group 1: valley bottom clay</option><option value="2" selected>Group 2: alluvial silt loam</option><option value="3">Group 3: footslope red clay</option></select></label>
+      <label class="field"><span>Install date</span><input id="w-date" type="date"></label>
+      <label class="field"><span>Site</span><input id="w-client" type="text" placeholder="Name or address"></label>
+      <label class="field"><span>Who waters</span><select id="w-who"><option>Owner</option><option>Hired contractor</option></select></label>
+    </div>
+    <h2>Plants</h2>
+    <div id="w-rows"></div>
+    <div class="row-actions"><button class="btn quiet small" id="w-add" type="button">Add a plant</button></div>
+    <details><summary><b>Watering cost</b> <span class="muted small">If you hire the watering out</span></summary><div class="body">
+      <div class="form">
+        <label class="field"><span>Hours per visit</span><input id="w-hrs" type="number" min="0" step="0.5" value="1.5"></label>
+        <label class="field"><span>Hourly rate ($)</span><input id="w-rate" type="number" min="0" value="150"></label>
+      </div>
+      <div id="w-cost"></div>
+    </div></details>
+  </div>
+
+  <div class="plan" id="w-plan" aria-live="polite"></div>
+  <div class="row-actions no-print"><button class="btn" type="button" id="w-print">Print the plan</button></div>
+
+  <div class="no-print">
+    <h2>Rules behind the plan</h2>
+    <table>
+      <thead><tr><th>Days between waterings</th><th class="num">Group 1</th><th class="num">Group 2</th><th class="num">Group 3</th></tr></thead>
+      <tbody><tr><td>First summer</td><td class="num">10</td><td class="num">7</td><td class="num">5</td></tr>
+      <tr><td>Second summer</td><td class="num">21</td><td class="num">14</td><td class="num">10</td></tr>
+      <tr><td>Third summer</td><td class="num">30</td><td class="num">28</td><td class="num">21</td></tr></tbody>
+    </table>
+    <ul class="plain">
+      <li>Clay holds water, so intervals stretch; the risk there is root rot. Upland soils dry out fast, so intervals shorten.</li>
+      <li>Trees get 10 gallons per inch of trunk caliper. Shrubs get about 1 gallon per container gallon.</li>
+      <li>Drought-adapted species (manzanita, ceanothus, rockrose, rosemary and others) water 1.5 times less often for two summers, then get no summer water at all. Summer water after year two kills them more often than drought.</li>
+      <li>Heat wave, three or more days above 100 °F: water every planting once, in any year.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= HEDGEROW ================= -->
+<section data-view="hedgerow" hidden>
+  <h1 tabindex="-1">Hedgerows</h1>
+  <p>A hedgerow is a mixed, layered planting in place of a single-species hedge. It screens, feeds wildlife and spreads pest risk across six to ten species. Use it where the site is at least 8 ft wide. Based on <a href="https://extension.oregonstate.edu/catalog/em-8721-guide-hedgerows-plantings-enhance-biodiversity-sustainability-functionality">OSU Extension EM 8721</a>, adapted to residential lots.</p>
+
+  <figure>
+    <svg class="fc" viewBox="0 0 660 230" role="img" aria-label="Cross-section of a three-row hedgerow: low edge shrubs on both sides, a screening row inside them, and one tall tree row in the center, about 20 feet wide in total.">
+      <line x1="20" y1="180" x2="640" y2="180" stroke="currentColor" stroke-width="1.5"/>
+      <g fill="var(--leaf-tint)" stroke="var(--leaf)" stroke-width="1.4">
+        <ellipse cx="80" cy="162" rx="40" ry="18"/><ellipse cx="580" cy="162" rx="40" ry="18"/>
+        <ellipse cx="190" cy="132" rx="46" ry="48"/><ellipse cx="470" cy="132" rx="46" ry="48"/>
+        <ellipse cx="330" cy="70" rx="66" ry="56"/>
+      </g>
+      <g stroke="currentColor" stroke-width="2"><line x1="190" y1="160" x2="190" y2="180"/><line x1="470" y1="160" x2="470" y2="180"/><line x1="330" y1="110" x2="330" y2="180"/></g>
+      <g class="elab" text-anchor="middle">
+        <text x="80" y="200">Edge: low</text><text x="580" y="200">Edge: low</text>
+        <text x="190" y="200">Screen</text><text x="470" y="200">Screen</text>
+        <text x="330" y="200">Tall center</text>
+      </g>
+      <line x1="40" y1="216" x2="620" y2="216" stroke="currentColor" stroke-width="1" marker-start="url(#hd)" marker-end="url(#hd)"/>
+      <defs><marker id="hd" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+      <text x="330" y="212" text-anchor="middle" class="elab" style="paint-order:stroke;stroke:var(--ground);stroke-width:6px">about 20 ft</text>
+    </svg>
+    <figcaption>Tallest plants in the center, screening shrubs inside, low spreading shrubs at the edges. On a narrow lot, drop to two staggered rows.</figcaption>
+  </figure>
+
+  <h2>Plant count</h2>
+  <div class="form">
+    <label class="field"><span>Length (ft)</span><input id="h-len" type="number" min="1" value="100"></label>
+    <label class="field"><span>Rows</span><input id="h-rows" type="number" min="1" max="6" value="2"></label>
+    <label class="field"><span>Spacing in the row (ft)</span><input id="h-sp" type="number" min="2" value="6"><small>Guide: 6–8 ft. Use 4–6 ft for a faster screen.</small></label>
+    <label class="field"><span>Spacing between rows (ft)</span><input id="h-rsp" type="number" min="2" value="8"><small>Guide: 8–10 ft.</small></label>
+  </div>
+  <div id="h-out" class="panel" aria-live="polite"></div>
+
+  <h2>Template A: wet clay, three rows, about 20 ft wide</h2>
+  <table>
+    <thead><tr><th>Row</th><th>Pick 2–4 per row</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><b>Tall center</b></td><td><span class="sci">Malus fusca</span>; <span class="sci">Quercus garryana</span> or <span class="sci">Q. bicolor</span> (one per 25–30 ft); <span class="sci">Salix hookeriana</span> on rural sites</td><td>Do not fill the center with oak. Use crabapple between oaks.</td></tr>
+      <tr><td><b>Screen</b></td><td><span class="sci">Morella californica</span>; <span class="sci">Physocarpus capitatus</span>; <span class="sci">Sambucus cerulea</span>; <span class="sci">Cornus sericea</span>; <span class="sci">Oemleria cerasiformis</span></td><td>Wax myrtle in every second or third slot. It is the only evergreen here.</td></tr>
+      <tr><td><b>Edge</b></td><td><span class="sci">Spiraea douglasii</span>; <span class="sci">Rosa nutkana</span>; <span class="sci">Symphoricarpos albus</span>; <span class="sci">Lonicera involucrata</span></td><td>All spread. Give them a defined strip and a mowed edge.</td></tr>
+    </tbody>
+  </table>
+  <div class="panel caution"><p><b>Family limit.</b> Crabapple, ninebark, osoberry, rose and spiraea are all in the rose family. Keep them to 3 plants in 10 or fewer. A test mix built mostly from these natives reached about 70% one family.</p></div>
+
+  <h2>Template B: narrow residential, two staggered rows, 8–10 ft wide</h2>
+  <table>
+    <thead><tr><th>Row</th><th>Species</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><b>Back</b></td><td>Alternate <span class="sci">Morella californica</span> with <span class="sci">Physocarpus capitatus</span> (Groups 1–2) or <span class="sci">Osmanthus</span> × <span class="sci">burkwoodii</span> (Groups 2–3)</td><td>Direct replacement for a laurel or arborvitae hedge.</td></tr>
+      <tr><td><b>Front</b></td><td><span class="sci">Ribes sanguineum</span>; <span class="sci">Cornus sericea</span> 'Isanti'; <span class="sci">Berberis aquifolium</span>; <span class="sci">Rosa nutkana</span> away from paths</td><td>Informal. Not for a formal, sheared look.</td></tr>
+    </tbody>
+  </table>
+  <h2>Care</h2>
+  <ul class="plain">
+    <li>Mulch 3–4 in deep. Keep a mowed strip around the planting for weeds, rodents and fire.</li>
+    <li>Keep hedgerows out of the first 5 ft around buildings. No resinous evergreens next to walls.</li>
+    <li>Watering ends after year three. The hedgerow closes in year four to eight, so keep edge and weed control going until then.</li>
+  </ul>
+</section>
+
+<!-- ================= WORKFLOWS ================= -->
+<section data-view="workflows" hidden>
+  <h1 tabindex="-1">How it works</h1>
+  <p>The same process works for one backyard tree or a whole neighborhood. The loop at the top is how the ratings improve: each year's results inform the next choice.</p>
+  <figure>
+    <svg class="fc" viewBox="0 0 860 270" role="img" aria-label="Process: assess the site, decide whether to replace, choose species, plant, water for three summers, and check each year. Yearly checks update what we know grows well, which informs the next choice. Ash trees branch to the ash tool, whose treatment dates feed the yearly checks.">
+      <defs><marker id="aw" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+      <g><rect class="box accent" x="290" y="14" width="118" height="46" rx="4"/><text class="b" x="349" y="36" text-anchor="middle">What grows</text><text x="349" y="52" text-anchor="middle">well here</text></g>
+      <g><rect class="box" x="10" y="110" width="118" height="48" rx="4"/><text class="b" x="69" y="132" text-anchor="middle">Assess</text><text x="69" y="148" text-anchor="middle">the site</text></g>
+      <g><rect class="box" x="150" y="110" width="118" height="48" rx="4"/><text class="b" x="209" y="132" text-anchor="middle">Decide</text><text x="209" y="148" text-anchor="middle">replace or keep</text></g>
+      <g><rect class="box" x="290" y="110" width="118" height="48" rx="4"/><text class="b" x="349" y="132" text-anchor="middle">Choose</text><text x="349" y="148" text-anchor="middle">species</text></g>
+      <g><rect class="box" x="430" y="110" width="118" height="48" rx="4"/><text class="b" x="489" y="132" text-anchor="middle">Plant</text><text x="489" y="148" text-anchor="middle">in fall</text></g>
+      <g><rect class="box" x="570" y="110" width="118" height="48" rx="4"/><text class="b" x="629" y="132" text-anchor="middle">Water</text><text x="629" y="148" text-anchor="middle">3 summers</text></g>
+      <g><rect class="box" x="710" y="110" width="140" height="48" rx="4"/><text class="b" x="780" y="132" text-anchor="middle">Check</text><text x="780" y="148" text-anchor="middle">each year</text></g>
+      <g><rect class="box q" x="230" y="206" width="258" height="46" rx="4"/><text class="b" x="359" y="227" text-anchor="middle">Ash tool</text><text x="359" y="243" text-anchor="middle">treat, plant first, or replace</text></g>
+      <path class="edge" d="M128 134 H146" marker-end="url(#aw)"/>
+      <path class="edge" d="M268 134 H286" marker-end="url(#aw)"/>
+      <path class="edge" d="M408 134 H426" marker-end="url(#aw)"/>
+      <path class="edge" d="M548 134 H566" marker-end="url(#aw)"/>
+      <path class="edge" d="M688 134 H706" marker-end="url(#aw)"/>
+      <path class="edge" d="M349 60 V106" marker-end="url(#aw)"/><text class="elab" x="356" y="88">informs</text>
+      <path class="edge" d="M780 110 V37 H412" marker-end="url(#aw)"/><text class="elab" x="560" y="31">what survived, what failed and why</text>
+      <path class="edge" d="M69 158 V229 H226" marker-end="url(#aw)"/><text class="elab" x="76" y="222">ash tree</text>
+      <path class="edge" d="M488 229 H780 V162" marker-end="url(#aw)"/><text class="elab" x="500" y="222">treatment dates</text>
+    </svg>
+    <figcaption>Each planting is checked once a year. Recording what survived, what failed and why is what turns these ratings into local evidence.</figcaption>
+  </figure>
+  <div id="wf-list"></div>
+</section>
+
+<!-- ================= FRAMEWORK ================= -->
+<section data-view="framework" hidden>
+  <h1 tabindex="-1">Framework</h1>
+
+  <h2 id="framework-axes">Two axes, not one</h2>
+  <p>Each species is placed by its summer drought tolerance and its winter-wet clay tolerance. The plants in the top right handle both seasons. The bottom right is the trap: Mediterranean shrubs that survive August and drown in February.</p>
+  <div class="matrix" id="matrix" role="img" aria-label="Grid of species by summer drought tolerance (left to right, very low to very high) and winter-wet clay tolerance (bottom to top, very low to very high)."></div>
+  <div class="legend"><span><span class="mchip A">name</span>Tier A, proven</span><span><span class="mchip B">name</span>Tier B, trial</span><span><span class="mchip C">name</span>Tier C or rejected</span></div>
+
+  <h2 id="framework-soil">Soil groups</h2>
+  <div class="panel g1"><p><b>Group 1, valley bottom clay.</b> Bethel, Dayton, Natroy, Amity and Concord series. Poorly drained, with a perched water table from November to April. Winter-wet tolerance decides. Use a 12–18 in berm for anything rated "Caution."</p></div>
+  <div class="panel g2"><p><b>Group 2, alluvial silt loam.</b> Malabon, Coburg, Salem, Chehalis and Newberg series. Deep and well drained. Nearly the whole palette fits.</p></div>
+  <div class="panel g3"><p><b>Group 3, footslope red clay.</b> Jory, Nekia, Bellpine and Dixonville series. Sheds water, often shallow to bedrock, dry in summer. The right home for California and Mediterranean species. Check rooting depth before large trees.</p></div>
+  <figure>
+    <svg class="fc" viewBox="0 0 830 220" role="img" aria-label="Soil field call: pull the soil survey, dig an 18 inch hole and fill it with water. If it has not drained in an hour, call Group 1. If it drained and the site is a reddish slope with shallow soil, call Group 3. Otherwise Group 2.">
+      <defs><marker id="as" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+      <g><rect class="box" x="10" y="86" width="140" height="48" rx="4"/><text class="b" x="80" y="107" text-anchor="middle">Pull the soil</text><text x="80" y="123" text-anchor="middle">survey map unit</text></g>
+      <g><rect class="box" x="180" y="86" width="150" height="48" rx="4"/><text class="b" x="255" y="107" text-anchor="middle">Dig 18 in,</text><text x="255" y="123" text-anchor="middle">fill with water</text></g>
+      <g><rect class="box q" x="360" y="86" width="160" height="48" rx="4"/><text class="b" x="440" y="107" text-anchor="middle">Drained</text><text x="440" y="123" text-anchor="middle">within 1 hour?</text></g>
+      <g><rect class="box soilg1" x="570" y="14" width="150" height="44" rx="4"/><text class="b" x="645" y="41" text-anchor="middle">Group 1</text></g>
+      <g><rect class="box q" x="560" y="146" width="160" height="48" rx="4"/><text class="b" x="640" y="167" text-anchor="middle">Reddish slope,</text><text x="640" y="183" text-anchor="middle">shallow soil?</text></g>
+      <g><rect class="box soilg3" x="745" y="120" width="78" height="40" rx="4"/><text class="b" x="784" y="145" text-anchor="middle">Group 3</text></g>
+      <g><rect class="box soilg2" x="745" y="176" width="78" height="40" rx="4"/><text class="b" x="784" y="201" text-anchor="middle">Group 2</text></g>
+      <path class="edge" d="M150 110 H176" marker-end="url(#as)"/>
+      <path class="edge" d="M330 110 H356" marker-end="url(#as)"/>
+      <path class="edge" d="M520 110 H542 V36 H566" marker-end="url(#as)"/><text class="elab" x="527" y="30">no</text>
+      <path class="edge" d="M520 110 H542 V170 H556" marker-end="url(#as)"/><text class="elab" x="527" y="164">yes</text>
+      <path class="edge" d="M720 170 H731 V140 H741" marker-end="url(#as)"/><text class="elab" x="724" y="133">yes</text>
+      <path class="edge" d="M720 170 H731 V196 H741" marker-end="url(#as)"/><text class="elab" x="724" y="214">no</text>
+    </svg>
+    <figcaption>The drain test overrides the soil survey. Urban lots are often cut, filled or scraped, and construction fill creates Group 1 conditions on a Group 2 map. Grey-green or mottled soil at depth also means Group 1.</figcaption>
+  </figure>
+
+  <h2>Should it be replaced?</h2>
+  <figure>
+    <svg class="fc" viewBox="0 0 820 200" role="img" aria-label="Decision: a plant failing or hazardous now should be replaced soon. If not, a plant facing a known threat such as EAB needs a plan ahead. If not, a healthy plant that is costly to maintain is optional to replace. Otherwise, keep it.">
+      <defs><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+      <g><rect class="box q" x="10" y="20" width="200" height="52" rx="4"/><text class="b" x="110" y="42" text-anchor="middle">Failing or hazardous</text><text x="110" y="59" text-anchor="middle">now?</text></g>
+      <g><rect class="box q" x="300" y="20" width="200" height="52" rx="4"/><text class="b" x="400" y="42" text-anchor="middle">Known threat coming?</text><text x="400" y="59" text-anchor="middle">(ash before EAB)</text></g>
+      <g><rect class="box q" x="590" y="20" width="200" height="52" rx="4"/><text class="b" x="690" y="42" text-anchor="middle">Costly to</text><text x="690" y="59" text-anchor="middle">maintain?</text></g>
+      <g><rect class="box r-alert" x="35" y="130" width="150" height="44" rx="4"/><text class="b" x="110" y="157" text-anchor="middle">Replace soon</text></g>
+      <g><rect class="box r-amber" x="325" y="130" width="150" height="44" rx="4"/><text class="b" x="400" y="157" text-anchor="middle">Plan ahead</text></g>
+      <g><rect class="box" x="585" y="130" width="100" height="44" rx="4"/><text class="b" x="635" y="157" text-anchor="middle">Optional</text></g>
+      <g><rect class="box" x="700" y="130" width="110" height="44" rx="4"/><text class="b" x="755" y="157" text-anchor="middle">Keep it</text></g>
+      <path class="edge" d="M210 46 H296" marker-end="url(#ac)"/><text class="elab" x="245" y="40">no</text>
+      <path class="edge" d="M500 46 H586" marker-end="url(#ac)"/><text class="elab" x="535" y="40">no</text>
+      <path class="edge" d="M110 72 V126" marker-end="url(#ac)"/><text class="elab" x="117" y="104">yes</text>
+      <path class="edge" d="M400 72 V126" marker-end="url(#ac)"/><text class="elab" x="407" y="104">yes</text>
+      <path class="edge" d="M690 72 V100 H635 V126" marker-end="url(#ac)"/><text class="elab" x="642" y="117">yes</text>
+      <path class="edge" d="M690 100 H755 V126" marker-end="url(#ac)"/><text class="elab" x="762" y="117">no</text>
+    </svg>
+    <figcaption>Replace soon: the question is timing, and waiting costs more. Plan ahead: protect what is worth protecting and plant successors for the rest. Optional: the case rests on long-term maintenance cost, so it suits owners who plan to stay ten years or more.</figcaption>
+  </figure>
+
+  <h2>Tiers</h2>
+  <dl class="facts">
+    <dt><span class="badge A fill-A">A</span> Proven</dt><dd>Documented performance in the valley. Use freely in the right soil group.</dd>
+    <dt><span class="badge B fill-B">B</span> Trial</dt><dd>Sound logic but unproven here, or carrying a named risk. Keep to 10% or less of any planting.</dd>
+    <dt><span class="badge C">C</span> Caution</dt><dd>Fails the low-input standard. Use only with a clear reason and a backup plan.</dd>
+    <dt><span class="badge Reject">Reject</span></dt><dd>Do not plant. Kept on the list with the reason, so the decision is not argued again.</dd>
+    <dt>Promotion</dt><dd>A trial species earns Tier A after several plantings reach year three with 80% or more survival. A species below 70% survival drops a tier. Mower damage and missed watering do not count against the species.</dd>
+  </dl>
+
+  <h2>Diversity: the 10-20-30 rule</h2>
+  <p>No species above 10% of all plants installed, no genus above 20%, no family above 30%. Two limits bind first here. Oaks lead the wet-clay list, so the oak genus fills fast. Most wet-site natives are in the rose family, so that family fills fast in wet hedgerows. Replacing an ash monoculture with an oak or rose-family monoculture solves nothing.</p>
+
+  <h2>Cost logic</h2>
+  <p>Hedges and trees make the case for replacement in different ways. The figures below use example prices, with professional labor at $150 per hour, over 15 years.</p>
+  <table>
+    <thead><tr><th>Conversion</th><th class="num">Simple payback</th><th>What decides it</th></tr></thead>
+    <tbody>
+      <tr><td>Photinia hedge, 100 ft</td><td class="num">about 5 years</td><td>Ends shearing and fungicide sprays</td></tr>
+      <tr><td>Boxwood hedge, 50 ft</td><td class="num">about 5 years</td><td>Shearing frequency, plus blight risk</td></tr>
+      <tr><td>English laurel hedge, 100 ft</td><td class="num">about 8 years</td><td>The 15-year cost of shearing</td></tr>
+      <tr><td>Bradford pear, one tree</td><td class="num">about 30 years</td><td>Timing and safety, not savings</td></tr>
+      <tr><td>Healthy ash, one tree</td><td class="num">over 50 years</td><td>Treat it instead; it is cheaper and keeps the canopy</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ================= SOURCES ================= -->
+<section data-view="sources" hidden>
+  <h1 tabindex="-1">Sources and limits</h1>
+  <h2>Limits</h2>
+  <ul class="plain">
+    <li>Tolerance ratings and tiers are professional judgment for this region, built from species range, native habitat and reported regional performance. They are not trial data. Records from real plantings should correct them.</li>
+    <li>Prices in the tools are examples. Replace them with your own.</li>
+    <li>EAB status was checked in October 2026. Check the ODA page before relying on it.</li>
+  </ul>
+  <h2>Species and design</h2>
+  <ul class="plain">
+    <li><a href="https://selectree.calpoly.edu/list/536">SelecTree, list 536</a>, Cal Poly Urban Forest Ecosystems Institute. Source of 13 trees. Calibrated for interior California heat; it does not screen winter-wet soil.</li>
+    <li>Monnette, P. and J. Hobbs. <a href="https://extension.oregonstate.edu/catalog/em-8721-guide-hedgerows-plantings-enhance-biodiversity-sustainability-functionality">A Guide to Hedgerows (EM 8721)</a>. OSU Extension, revised 2020, reviewed 2023.</li>
+    <li><a href="https://www.greatplantpicks.org/">Great Plant Picks</a>, <a href="https://xeraplants.com/">Xera Plants</a> and <a href="https://www.cistus.com/">Cistus Nursery</a>. Regional references for the shrub layer.</li>
+    <li><a href="https://websoilsurvey.nrcs.usda.gov/">NRCS Web Soil Survey</a> for soil map units.</li>
+    <li>Santamour, F. S. (1990). Trees for urban planting: diversity, uniformity, and common sense. Source of the 10-20-30 rule.</li>
+  </ul>
+  <h2>Invasive status</h2>
+  <ul class="plain">
+    <li><a href="https://www.eugene-or.gov/Archive/ViewFile/Item/1531">City of Eugene, Ordinance 20351, Exhibit F</a>. Lists English laurel, sweet cherry and black locust as invasive.</li>
+    <li><a href="https://solvepestproblems.oregonstate.edu/weeds/cherry-laurel">OSU Solve Pest Problems: cherry laurel</a>.</li>
+  </ul>
+  <h2>Emerald ash borer</h2>
+  <ul class="plain">
+    <li><a href="https://www.oregon.gov/oda/ippm/survey-treatment/pages/emerald-ash-borer.aspx">Oregon Department of Agriculture: Emerald Ash Borer</a>. Quarantine counties and rules.</li>
+    <li><a href="https://capitalpress.com/2026/06/24/emerald-ash-borer-spreads-to-three-new-communities-in-oregon/">Capital Press, June 2026</a> and <a href="https://www.kptv.com/2026/08/06/emerald-ash-borer-detected-salem-beaverton/">KPTV, August 2026</a>. 2026 detections.</li>
+    <li><a href="https://www.amleo.com/mastery-center/expert-advice/emerald-ash-borer-treatment-and-removal">A.M. Leonard: EAB treatment vs. removal</a> and <a href="https://frerichstreeservice.com/eab-pricing/">Frerichs Tree Service: EAB pricing</a>. Treatment cost and canopy-loss thresholds.</li>
+    <li><a href="https://www.klcc.org/environment/2025-09-14/state-scientists-are-planting-thousands-of-oregon-ash-trees-in-invasive-beetle-territory-hoping-to-find-rare-natural-resistance">KLCC, September 2025</a>. Search for EAB-resistant Oregon ash.</li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built by Zachary Perna, ISA Certified Arborist, Eugene, Oregon. Ratings are professional judgment, not trial data. Check site conditions, and ask a local arborist when in doubt.</p>
+</footer>
+</main>
+</div>
+
+<script>
+const D = {"palette": [{"sci": "Maclura pomifera 'White Shield'", "com": "Osage Orange", "genus": "Maclura", "fam": "Moraceae", "cv": "'White Shield' - thornless, fruitless male clone. VERIFY CLONE.", "habit": "Canopy tree · Dec", "size": "35-50 x 35-45", "maxh": 50, "dr": "Very High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "No", "wclass": "Standard", "srcr": 4, "pest": "Very few", "notes": "Near-indestructible on clay, compaction and drought. Entire value depends on getting the true clone - seedling Maclura is thorny and drops softball fruit. Inspect at the nursery. Watch for: Suckers if roots are damaged.", "source": "SelecTree 536", "review": null}, {"sci": "Quercus bicolor", "com": "Swamp White Oak", "genus": "Quercus", "fam": "Fagaceae", "cv": "Straight species", "habit": "Canopy tree · Dec", "size": "50-60 x 50-60", "maxh": 60, "dr": "High", "ww": "Very High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Caution", "wires": "No", "wclass": "Standard", "srcr": 2, "pest": "No significant regional issues", "notes": "Added specifically as the Oregon ash replacement. Tolerates extended winter saturation better than anything else on this list while still handling summer drought - that combination is exactly the wet-bottomland niche ash occupies and almost nothing else fills. Watch for: Acorn litter.", "source": "Regional addition", "review": null}, {"sci": "Quercus garryana", "com": "Oregon White Oak", "genus": "Quercus", "fam": "Fagaceae", "cv": "Local provenance", "habit": "Canopy tree · Dec", "size": "50-80 x 50-80", "maxh": 80, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "No", "wclass": "Standard", "srcr": 3, "pest": "Minor oak twig blight; jumping gall wasp cosmetic", "notes": "The valley benchmark: evolved for exactly the wet-winter/dry-summer regime. Highest habitat value on the list. Slow establishment - do not overwater after year 3. Watch for: Acorn and leaf litter.", "source": "Regional addition", "review": null}, {"sci": "Quercus imbricaria", "com": "Shingle Oak", "genus": "Quercus", "fam": "Fagaceae", "cv": "Straight species", "habit": "Canopy tree · Dec (marcescent)", "size": "50-60 x 50-60", "maxh": 60, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Caution", "wires": "No", "wclass": "Standard", "srcr": 2, "pest": "Few serious issues", "notes": "Marcescence is the whole story: excellent tall winter screen, but not for anyone who wants a tidy look. Know this before planting. Watch for: Holds dead brown leaves through winter.", "source": "SelecTree 536", "review": null}, {"sci": "Quercus macrocarpa", "com": "Bur Oak", "genus": "Quercus", "fam": "Fagaceae", "cv": "Straight species", "habit": "Canopy tree · Dec", "size": "60-80 x 60-80", "maxh": 80, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "No", "wclass": "Standard", "srcr": 2, "pest": "No significant regional issues", "notes": "Strongest large-canopy option for winter-saturated clay. Tolerates compaction, seasonal flooding and drought. Slow, so plant larger stock or expect patience. Watch for: Large acorns - avoid over walks/patios.", "source": "SelecTree 536", "review": null}, {"sci": "Calocedrus decurrens", "com": "Incense Cedar", "genus": "Calocedrus", "fam": "Cupressaceae", "cv": "Straight species", "habit": "Conifer · Evg", "size": "40-70 x 15-25", "maxh": 70, "dr": "High", "ww": "Moderate", "tier": "A", "g1": "Caution", "g2": "Yes", "g3": "Yes", "wires": "No", "wclass": "Standard", "srcr": 2, "pest": "Generally clean; avoid saturated soil", "notes": "Best native tall evergreen screen. Narrow footprint suits property lines. Better drainage tolerance than most conifers but still avoid Dayton/Bethel bottoms.", "source": "Regional addition", "review": null}, {"sci": "Pinus ponderosa", "com": "Ponderosa Pine", "genus": "Pinus", "fam": "Pinaceae", "cv": "SPECIFY Willamette Valley seed source", "habit": "Conifer · Evg", "size": "60-100 x 25-40", "maxh": 100, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "No", "wclass": "Standard", "srcr": 2, "pest": "Sequoia pitch moth (cosmetic); avoid summer pruning", "notes": "Provenance is not optional: the Willamette Valley race tolerates seasonally saturated clay that interior sources will not. Confirm seed source in writing on the PO. Watch for: Needle and cone litter.", "source": "Regional addition", "review": null}, {"sci": "Amelanchier alnifolia", "com": "Western Serviceberry", "genus": "Amelanchier", "fam": "Rosaceae", "cv": "Straight species", "habit": "Large shrub / small tree · Dec", "size": "6-15 x 6-12", "maxh": 15, "dr": "High", "ww": "Moderate", "tier": "A", "g1": "Caution", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "Rust (cedar-apple type) near junipers; fireblight", "notes": "Spring bloom, edible fruit, fall color. Not for true bottomland; use on Group 1 only on a berm.", "source": "OSU EM 8721", "review": null}, {"sci": "Arbutus unedo", "com": "Strawberry Tree", "genus": "Arbutus", "fam": "Ericaceae", "cv": "'Compacta' / 'Elfin King' hedging; 'Marina' as small tree", "habit": "Large shrub / small tree · Evg", "size": "8-25 x 8-25", "maxh": 25, "dr": "High", "ww": "Moderate", "tier": "A", "g1": "Caution", "g2": "Yes", "g3": "Yes", "wires": "Caution", "wclass": "Standard", "srcr": 1, "pest": "Root rot in saturated soil; otherwise clean", "notes": "Best hedge option from the source list and a strong multi-season performer. Keep off valley-bottom clay or plant on a raised berm. Site away from patios and light-colored paving. Watch for: Fruit drop stains hardscape.", "source": "SelecTree 536", "review": null}, {"sci": "Cotinus coggygria", "com": "Smokebush", "genus": "Cotinus", "fam": "Anacardiaceae", "cv": "'Royal Purple', 'Grace' (larger)", "habit": "Large shrub / small tree · Dec", "size": "10-15 x 10-15", "maxh": 15, "dr": "Very High", "ww": "Moderate", "tier": "A", "g1": "Caution", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 1, "pest": "Verticillium wilt on poorly drained sites", "notes": "The purple-foliage replacement for a flowering plum. Genuinely drought-hardy, unlike the Prunus it replaces. Can be coppiced for larger leaf color or grown on as a small multi-stem tree.", "source": "Great Plant Picks", "review": null}, {"sci": "Maackia amurensis", "com": "Amur Maackia", "genus": "Maackia", "fam": "Fabaceae", "cv": "Straight species", "habit": "Small tree · Dec", "size": "20-30 x 20-30", "maxh": 30, "dr": "High", "ww": "Moderate", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Caution", "wires": "Yes", "wclass": "Standard", "srcr": 3, "pest": "No significant issues", "notes": "Borderline A/B - avoid true bottomland positions. Nitrogen fixer, tolerates poor and compacted soil, coppery peeling bark. One of few genuine under-wire options here.", "source": "SelecTree 536", "review": null}, {"sci": "Malus fusca", "com": "Pacific Crabapple", "genus": "Malus", "fam": "Rosaceae", "cv": "Straight species, local seed source", "habit": "Small tree · Dec", "size": "15-30 x 15-25", "maxh": 30, "dr": "Moderate", "ww": "Very High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Caution", "wires": "Yes", "wclass": "Standard", "srcr": 3, "pest": "Apple scab and rust possible; usually minor", "notes": "Native wetland-edge tree. One of very few non-oak trees for Group 1 clay. Thorny spurs; small fruit feeds birds. Center-row tree in a wet-site hedgerow.", "source": "OSU EM 8721", "review": null}, {"sci": "Parrotia persica", "com": "Persian Ironwood", "genus": "Parrotia", "fam": "Hamamelidaceae", "cv": "'Vanessa' / 'Persian Spire' for narrow sites", "habit": "Small tree · Dec", "size": "20-40 x 15-30", "maxh": 40, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Caution", "wires": "No", "wclass": "Standard", "srcr": 1, "pest": "Effectively pest-free in the PNW", "notes": "Most soil-agnostic species on the list and an easy choice: exfoliating bark, reliable fall color, clean habit. A good default where an ornamental is wanted rather than a native.", "source": "SelecTree 536", "review": null}, {"sci": "Sambucus cerulea", "com": "Blue Elderberry", "genus": "Sambucus", "fam": "Viburnaceae", "cv": "Straight species", "habit": "Large shrub / small tree · Dec", "size": "10-20 x 10-20", "maxh": 20, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "Few; stems are short-lived", "notes": "Fits all three soil groups. Fast. High pollinator and bird value. Renew by removing old stems every few years. Edible fruit after cooking; raw fruit, stems and leaves are toxic.", "source": "OSU EM 8721", "review": null}, {"sci": "Berberis aquifolium", "com": "Tall Oregon Grape", "genus": "Berberis", "fam": "Berberidaceae", "cv": "syn. Mahonia aquifolium; 'Compacta' for low mass", "habit": "Shrub / hedge · Evg", "size": "3-8 x 3-6", "maxh": 8, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 1, "pest": "Occasional rust and leaf spot in shade", "notes": "Handles the full soil range plus deep shade. Excellent under-canopy layer where turf currently fails. Very low input once established. Watch for: Spiny foliage - keep off walkway edges.", "source": "Regional addition", "review": null}, {"sci": "Cornus sericea", "com": "Red-Osier Dogwood", "genus": "Cornus", "fam": "Cornaceae", "cv": "Straight species; 'Isanti' for compact", "habit": "Shrub / hedge · Dec", "size": "6-12 x 8-12", "maxh": 12, "dr": "Moderate", "ww": "Very High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Caution", "wires": "Yes", "wclass": "Standard", "srcr": 1, "pest": "Leaf spot and anthracnose; minor", "notes": "syn. Cornus stolonifera. Red winter stems. Spreads by layering; good on banks and swales. Coppice old stems every 3-4 years to keep stem color.", "source": "OSU EM 8721", "review": null}, {"sci": "Corylus cornuta", "com": "Beaked Hazelnut", "genus": "Corylus", "fam": "Betulaceae", "cv": "var. californica (western form)", "habit": "Large shrub · Dec", "size": "10-20 x 10-15", "maxh": 20, "dr": "High", "ww": "High", "tier": "A", "g1": "Caution", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "Eastern filbert blight exposure near orchards; native form is more tolerant", "notes": "Understory and hedgerow filler. Takes shade. Squirrels take most nuts. Check distance to commercial hazelnut orchards before specifying.", "source": "OSU EM 8721", "review": null}, {"sci": "Frangula californica", "com": "California Coffeeberry", "genus": "Frangula", "fam": "Rhamnaceae", "cv": "'Eve Case', 'Mound San Bruno'", "habit": "Shrub / hedge · Evg", "size": "4-8 x 4-8", "maxh": 8, "dr": "High", "ww": "Moderate", "tier": "A", "g1": "Caution", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "Generally clean", "notes": "Clean evergreen hedge with better drought tolerance than most. Prefers drainage - berm it on Group 1 soils or substitute wax myrtle. Watch for: Berry drop.", "source": "Great Plant Picks", "review": null}, {"sci": "Garrya elliptica", "com": "Coast Silktassel", "genus": "Garrya", "fam": "Garryaceae", "cv": "'James Roof' (male, longest catkins)", "habit": "Shrub / hedge · Evg", "size": "8-15 x 8-12", "maxh": 15, "dr": "High", "ww": "Moderate", "tier": "A", "g1": "Caution", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Drought-adapted", "srcr": 2, "pest": "Generally clean; dislikes wet feet", "notes": "Winter catkins make it a strong ornamental choice for a drought planting. Needs drainage and shelter from hard east wind.", "source": "Great Plant Picks", "review": null}, {"sci": "Holodiscus discolor", "com": "Oceanspray", "genus": "Holodiscus", "fam": "Rosaceae", "cv": "Straight species", "habit": "Shrub / hedge · Dec", "size": "8-15 x 6-12", "maxh": 15, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "None significant", "notes": "Genuinely no-input once established. Tolerates both saturated winter clay and full summer drought - one of the few plants that does both well. Watch for: Persistent spent flower heads (winter interest or litter, depending on taste).", "source": "Regional addition", "review": null}, {"sci": "Lonicera involucrata", "com": "Twinberry", "genus": "Lonicera", "fam": "Caprifoliaceae", "cv": "Straight species", "habit": "Shrub / hedge · Dec", "size": "5-10 x 5-8", "maxh": 10, "dr": "Moderate", "ww": "Very High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "No", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "None significant", "notes": "Wet-edge shrub. Hummingbird flowers. Needs moisture; Group 1 and moist Group 2 only. Berries not edible.", "source": "OSU EM 8721", "review": null}, {"sci": "Morella californica", "com": "Pacific Wax Myrtle", "genus": "Morella", "fam": "Myricaceae", "cv": "syn. Myrica californica", "habit": "Shrub / hedge · Evg", "size": "10-25 x 8-15", "maxh": 25, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 1, "pest": "Generally clean", "notes": "Workhorse hedge for winter-wet clay. Shears to 6-15 ft, nitrogen-fixing, fast establishment. The primary replacement for laurel and arborvitae.", "source": "Regional addition", "review": null}, {"sci": "Oemleria cerasiformis", "com": "Osoberry / Indian Plum", "genus": "Oemleria", "fam": "Rosaceae", "cv": "Straight species", "habit": "Shrub / hedge · Dec", "size": "5-15 x 5-10", "maxh": 15, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Caution", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "None significant", "notes": "First native shrub to bloom (Feb-Mar). Early pollinator food. Drops leaves early in dry summers; this is normal. Separate male and female plants; fruit only on female.", "source": "OSU EM 8721", "review": null}, {"sci": "Osmanthus delavayi", "com": "Delavay Osmanthus", "genus": "Osmanthus", "fam": "Oleaceae", "cv": "Straight species", "habit": "Shrub / hedge · Evg", "size": "4-8 x 4-8", "maxh": 8, "dr": "High", "ww": "Moderate", "tier": "A", "g1": "Caution", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "Generally clean; no blight equivalent", "notes": "The boxwood replacement. Fine texture, takes formal shearing, and roughly a third the growth rate - which is the point, since shearing frequency drives the cost. Not blight-susceptible.", "source": "Great Plant Picks", "review": null}, {"sci": "Osmanthus x burkwoodii", "com": "Burkwood Osmanthus", "genus": "Osmanthus", "fam": "Oleaceae", "cv": "Also O. delavayi for finer texture", "habit": "Shrub / hedge · Evg", "size": "6-10 x 6-8", "maxh": 10, "dr": "High", "ww": "Moderate", "tier": "A", "g1": "Caution", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "Generally clean", "notes": "The formal-hedge choice for a clipped look. Slower than laurel, which is the point - roughly half the shearing frequency.", "source": "Great Plant Picks", "review": null}, {"sci": "Physocarpus capitatus", "com": "Pacific Ninebark", "genus": "Physocarpus", "fam": "Rosaceae", "cv": "Straight species", "habit": "Shrub / hedge · Dec", "size": "6-12 x 6-10", "maxh": 12, "dr": "Moderate", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Caution", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "Powdery mildew in shade; minor", "notes": "Wet-site workhorse. Peeling bark, white spring flowers. Middle-row filler in wet hedgerows.", "source": "OSU EM 8721", "review": null}, {"sci": "Ribes sanguineum", "com": "Red-Flowering Currant", "genus": "Ribes", "fam": "Grossulariaceae", "cv": "'King Edward VII', 'White Icicle'", "habit": "Shrub / hedge · Dec", "size": "6-10 x 5-8", "maxh": 10, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 1, "pest": "White pine blister rust alternate host - check before use near 5-needle pines", "notes": "High early-season pollinator value and easy to like. It drops its leaves in late summer by design; this is the most common false alarm with native plantings. Watch for: Summer leaf drop in drought (normal).", "source": "Regional addition", "review": null}, {"sci": "Rosa nutkana", "com": "Nootka Rose", "genus": "Rosa", "fam": "Rosaceae", "cv": "Straight species", "habit": "Shrub / hedge · Dec", "size": "4-8 x 4-8", "maxh": 8, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 1, "pest": "Black spot and rust; minor", "notes": "Thorny barrier edge. Suckers into a thicket; plan for it. Hips feed birds through winter. Keep off walkways.", "source": "OSU EM 8721", "review": null}, {"sci": "Spiraea douglasii", "com": "Western Spiraea / Hardhack", "genus": "Spiraea", "fam": "Rosaceae", "cv": "Straight species", "habit": "Shrub · Dec", "size": "4-7 x spreading", "maxh": 7, "dr": "Moderate", "ww": "Very High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "No", "wires": "Yes", "wclass": "Standard", "srcr": 1, "pest": "None significant", "notes": "Takes standing water. Rhizomatous; forms thickets. Low edge row in wet hedgerows and swales. Needs an edge restraint in tidy settings.", "source": "OSU EM 8721", "review": null}, {"sci": "Symphoricarpos albus", "com": "Common Snowberry", "genus": "Symphoricarpos", "fam": "Caprifoliaceae", "cv": "Straight species", "habit": "Shrub / hedge · Dec", "size": "3-6 x 3-6", "maxh": 6, "dr": "High", "ww": "High", "tier": "A", "g1": "Yes", "g2": "Yes", "g3": "Yes", "wires": "Yes", "wclass": "Standard", "srcr": 1, "pest": "None significant", "notes": "Best choice for difficult wet-then-dry banks and utility strips. Spreads by rhizome, so give it a defined area or an edge restraint. Watch for: Rhizomatous - will spread; not for tidy borders.", "source": "Regional addition", "review": null}, {"sci": "Pistacia chinensis", "com": "Chinese Pistache", "genus": "Pistacia", "fam": "Anacardiaceae", "cv": "Male clones only ('Keith Davey')", "habit": "Canopy tree · Dec", "size": "30-50 x 30-40", "maxh": 50, "dr": "High", "ww": "Low", "tier": "B", "g1": "No", "g2": "Yes", "g3": "Yes", "wires": "No", "wclass": "Standard", "srcr": 2, "pest": "Verticillium wilt on poorly drained sites", "notes": "Sharp drainage is mandatory. Also runs slower and colors less reliably here than in its California trials - expect less reliable fall color than in California. Watch for: Female trees fruit heavily.", "source": "SelecTree 536", "review": null}, {"sci": "Quercus kelloggii", "com": "California Black Oak", "genus": "Quercus", "fam": "Fagaceae", "cv": "SW Oregon provenance preferred", "habit": "Canopy tree · Dec", "size": "50-80 x 40-70", "maxh": 80, "dr": "High", "ww": "Low", "tier": "B", "g1": "No", "g2": "Caution", "g3": "Yes", "wires": "No", "wclass": "Drought-adapted", "srcr": 4, "pest": "Known Phytophthora ramorum host (SOD quarantine is Curry Co., not Lane)", "notes": "Credible assisted-migration candidate. Taprooted and transplant-sensitive: plant small container stock or direct seed, never large B&B. Upland sites only. Watch for: Acorn and leaf litter. Check the sudden oak death quarantine boundary each year.", "source": "SelecTree 536", "review": "2027-03-01"}, {"sci": "Quercus wislizeni", "com": "Interior Live Oak", "genus": "Quercus", "fam": "Fagaceae", "cv": "Straight species", "habit": "Canopy tree · Evg", "size": "30-60 x 30-60", "maxh": 60, "dr": "High", "ww": "Low", "tier": "B", "g1": "No", "g2": "Caution", "g3": "Yes", "wires": "No", "wclass": "Drought-adapted", "srcr": 5, "pest": "Generally clean", "notes": "Upland/well-drained only. Sourcing is the binding constraint - Portland reports evergreen oaks are hard to obtain in usable caliper. Arrange stock with a grower 2-3 years ahead. Watch for: Year-round leaf drop.", "source": "SelecTree 536", "review": null}, {"sci": "Tilia tomentosa", "com": "Silver Linden", "genus": "Tilia", "fam": "Malvaceae", "cv": "'Sterling'", "habit": "Canopy tree · Dec", "size": "50-70 x 40-50", "maxh": 70, "dr": "High", "ww": "High", "tier": "B", "g1": "Caution", "g2": "Yes", "g3": "No", "wires": "No", "wclass": "Standard", "srcr": 2, "pest": "PRIME Japanese beetle host. ODA eradication funded only through the 2027 crop year; Lane Co. clear as of 2025 detections.", "notes": "Climatically fine, strategically risky. It is a 50-year tree facing a pest whose control depends on state funding renewed every two years. Use it only if you accept that risk. Watch for: Honeydew (less than other Tilia). Review when state Japanese beetle funding is next decided.", "source": "SelecTree 536", "review": "2027-07-01"}, {"sci": "Hesperocyparis arizonica", "com": "Arizona Cypress", "genus": "Hesperocyparis", "fam": "Cupressaceae", "cv": "'Blue Ice', 'Carolina Sapphire'", "habit": "Conifer · Evg", "size": "30-50 x 15-25", "maxh": 50, "dr": "Very High", "ww": "Low", "tier": "B", "g1": "No", "g2": "Caution", "g3": "Yes", "wires": "No", "wclass": "Drought-adapted", "srcr": 2, "pest": "Seiridium and Botryosphaeria canker in cool wet springs; Phytophthora in wet soil", "notes": "Fastest screen on the list, and the one most likely to fail. Restrict to sharply drained, sunny, well-ventilated sites. Never plant as a solid single-species hedge row - canker will take the whole run.", "source": "SelecTree 536", "review": null}, {"sci": "Salix hookeriana", "com": "Hooker's Willow", "genus": "Salix", "fam": "Salicaceae", "cv": "Straight species; plant from live stakes", "habit": "Large shrub / small tree · Dec", "size": "10-25 x 10-20", "maxh": 25, "dr": "Moderate", "ww": "Very High", "tier": "B", "g1": "Yes", "g2": "Caution", "g3": "No", "wires": "No", "wclass": "Standard", "srcr": 1, "pest": "Willow borers, rust, canker", "notes": "Aggressive roots. Keep 50+ ft from sewer lines, drains and foundations. Rural swales and pond edges only. Cheap and fast from cuttings.", "source": "OSU EM 8721", "review": null}, {"sci": "Arctostaphylos densiflora", "com": "Vine Hill Manzanita", "genus": "Arctostaphylos", "fam": "Ericaceae", "cv": "'Howard McMinn' - the reliable clone here", "habit": "Shrub · Evg", "size": "5-7 x 6-8", "maxh": 7, "dr": "Very High", "ww": "Low", "tier": "B", "g1": "No", "g2": "Caution", "g3": "Yes", "wires": "Yes", "wclass": "Drought-adapted", "srcr": 3, "pest": "Phytophthora and branch dieback in wet or irrigated soil", "notes": "Superb on Group 3 slopes, reliably fatal in Group 1 bottoms. Never install on drip irrigation past year 2. Berm and use coarse mineral mulch, not bark.", "source": "Great Plant Picks", "review": null}, {"sci": "Ceanothus thyrsiflorus", "com": "Blueblossom", "genus": "Ceanothus", "fam": "Rhamnaceae", "cv": "'Victoria' is the hardiest reliable clone", "habit": "Shrub / hedge · Evg", "size": "6-12 x 6-12", "maxh": 12, "dr": "Very High", "ww": "Low", "tier": "B", "g1": "No", "g2": "Caution", "g3": "Yes", "wires": "Yes", "wclass": "Drought-adapted", "srcr": 2, "pest": "Root rot with summer water; hard-freeze damage in severe winters", "notes": "Plan on a 10-15 year lifespan and no summer water. Fast and spectacular, but not a permanent plant; do not use it where a long-lived hedge is needed. Watch for: Short-lived.", "source": "Great Plant Picks", "review": null}, {"sci": "Cistus x hybridus", "com": "White Rockrose", "genus": "Cistus", "fam": "Cistaceae", "cv": "Also C. x purpureus", "habit": "Shrub · Evg", "size": "2-4 x 4-6", "maxh": 4, "dr": "Very High", "ww": "Very Low", "tier": "B", "g1": "No", "g2": "Caution", "g3": "Yes", "wires": "Yes", "wclass": "Drought-adapted", "srcr": 1, "pest": "Root rot in winter-wet soil; does not respond to hard pruning", "notes": "Group 3 slopes and hell strips only. Cannot be renovated by cutting back into old wood - plan on replacing it at 10-12 years. Watch for: Short-lived; gets leggy.", "source": "Great Plant Picks", "review": null}, {"sci": "Salvia rosmarinus", "com": "Rosemary", "genus": "Salvia", "fam": "Lamiaceae", "cv": "'Tuscan Blue' upright; 'Huntington Carpet' prostrate", "habit": "Shrub / hedge · Evg", "size": "2-5 x 2-4", "maxh": 5, "dr": "Very High", "ww": "Very Low", "tier": "B", "g1": "No", "g2": "Caution", "g3": "Yes", "wires": "Yes", "wclass": "Drought-adapted", "srcr": 1, "pest": "Root rot on heavy soil", "notes": "Only on sharply drained sites. Popular, but on Group 1 clay use wax myrtle instead. Watch for: Gets woody and open with age.", "source": "Great Plant Picks", "review": null}, {"sci": "Aesculus x carnea", "com": "Red Horsechestnut", "genus": "Aesculus", "fam": "Sapindaceae", "cv": "'Briotii', 'Fort McNair'", "habit": "Canopy tree · Dec", "size": "30-40 x 30-40", "maxh": 40, "dr": "Low", "ww": "Moderate", "tier": "C", "g1": "Caution", "g2": "Caution", "g3": "No", "wires": "No", "wclass": "Standard", "srcr": 2, "pest": "Guignardia leaf blotch; heat and drought scorch", "notes": "Fails the low-input standard. Scorches by August in the valley without extra water. Not recommended. Watch for: Fruit litter.", "source": "SelecTree 536", "review": null}, {"sci": "Thuja plicata", "com": "Western Redcedar", "genus": "Thuja", "fam": "Cupressaceae", "cv": "—", "habit": "Conifer · Evg", "size": "50-70 x 15-25", "maxh": 70, "dr": "Low", "ww": "High", "tier": "C", "g1": "Caution", "g2": "Caution", "g3": "No", "wires": "No", "wclass": "Standard", "srcr": 1, "pest": "Drought dieback now common in the valley", "notes": "Listed in EM 8721. Declining in valley summers. Only on shaded, moist Group 2 sites with long-term water. Not a low-input plant.", "source": "OSU EM 8721", "review": null}, {"sci": "Viburnum opulus", "com": "Highbush Cranberry", "genus": "Viburnum", "fam": "Viburnaceae", "cv": "Native var. americanum ONLY", "habit": "Shrub · Dec", "size": "8-12 x 8-12", "maxh": 12, "dr": "Moderate", "ww": "High", "tier": "C", "g1": "Caution", "g2": "Caution", "g3": "No", "wires": "Yes", "wclass": "Standard", "srcr": 3, "pest": "Viburnum leaf beetle; European form spreads by birds", "notes": "Listed in EM 8721. Nurseries often sell the European form, which spreads. Buy only the native variety, or do not use it.", "source": "OSU EM 8721", "review": null}, {"sci": "Fraxinus latifolia", "com": "Oregon Ash", "genus": "Fraxinus", "fam": "Oleaceae", "cv": "—", "habit": "Canopy tree · Dec", "size": "40-80 x 30-50", "maxh": 80, "dr": "Moderate", "ww": "Very High", "tier": "Reject", "g1": "No", "g2": "No", "g3": "No", "wires": "No", "wclass": "Standard", "srcr": 1, "pest": "Emerald ash borer confirmed in Oregon", "notes": "Listed in EM 8721 as wet-tolerant. It is the tree being replaced. Use Quercus bicolor or Malus fusca (natives only on riparian sites). For existing ash, see the Ash and EAB page. Review each year against EAB spread, and if EAB-resistant Oregon ash stock becomes available.", "source": "OSU EM 8721", "review": "2027-03-01"}, {"sci": "Prunus avium", "com": "Sweet Cherry", "genus": "Prunus", "fam": "Rosaceae", "cv": "—", "habit": "Canopy tree · Dec", "size": "30-40 x 25-35", "maxh": 40, "dr": "Moderate", "ww": "Moderate", "tier": "Reject", "g1": "No", "g2": "No", "g3": "No", "wires": "No", "wclass": "Standard", "srcr": 1, "pest": "Bird-dispersed; spreads into woodland", "notes": "Listed in EM 8721, but it is a common invader of Willamette Valley oak woodland. Do not plant.", "source": "OSU EM 8721", "review": null}, {"sci": "Robinia pseudoacacia", "com": "Black Locust", "genus": "Robinia", "fam": "Fabaceae", "cv": "—", "habit": "Canopy tree · Dec", "size": "40-60 x 30-40", "maxh": 60, "dr": "Very High", "ww": "High", "tier": "Reject", "g1": "No", "g2": "No", "g3": "No", "wires": "No", "wclass": "Standard", "srcr": 1, "pest": "Locust borer; aggressive root suckers", "notes": "Listed in EM 8721. Suckers widely and naturalizes along valley roads and streams. Thorny. Do not plant.", "source": "OSU EM 8721", "review": null}, {"sci": "x Chitalpa tashkentensis", "com": "Chitalpa", "genus": "Chitalpa", "fam": "Bignoniaceae", "cv": "'Pink Dawn', 'Morning Cloud'", "habit": "Small tree · Dec", "size": "20-30 x 20-30", "maxh": 30, "dr": "High", "ww": "Very Low", "tier": "Reject", "g1": "No", "g2": "No", "g3": "Caution", "wires": "Yes", "wclass": "Standard", "srcr": 2, "pest": "Powdery mildew; Xylella-associated decline", "notes": "A desert hybrid requiring heat and low humidity. Wrong climate, wrong soil, wrong lifespan for a long-term planting. Do not plant. Watch for: Weak wood; short-lived (15-25 yrs).", "source": "SelecTree 536", "review": null}, {"sci": "Elaeagnus umbellata", "com": "Autumn Olive", "genus": "Elaeagnus", "fam": "Elaeagnaceae", "cv": "—", "habit": "Large shrub · Dec", "size": "12-20 x 12-20", "maxh": 20, "dr": "Very High", "ww": "Moderate", "tier": "Reject", "g1": "No", "g2": "No", "g3": "No", "wires": "No", "wclass": "Standard", "srcr": 1, "pest": "Bird-dispersed; invasive in much of the US", "notes": "Listed in EM 8721 as an edible hedgerow plant. Widely invasive. Do not plant.", "source": "OSU EM 8721", "review": null}], "cross": [["Prunus laurocerasus", "English laurel hedge", "Optional", "Grows 2-3 ft a year, so it is sheared 2-3 times a year for as long as it stands. Shot hole fungus in wet springs. The City of Eugene lists it as invasive: birds carry the seed into forest understory.", "Morella californica (Pacific wax myrtle)", "Osmanthus x burkwoodii (formal); Calocedrus decurrens (tall screen); Frangula californica 'Eve Case' (medium)", "Wax myrtle works on all three groups. Osmanthus and Frangula want drainage - berm on Group 1.", "2-3 shearings/yr down to 1", "It is healthy, so the reason to replace it is cost and spread. Over 15 years, shearing costs more than the conversion. The City of Eugene lists it as invasive: birds carry its seed into nearby woods."], ["Buxus sempervirens", "Low formal hedge, balls", "Optional", "Sheared 2-3x/yr to hold form. Boxwood blight is established in Oregon and is effectively untreatable once in a hedge. Leafminer and psyllid add spray cycles.", "Osmanthus delavayi", "Berberis aquifolium 'Compacta' (informal low mass); dwarf Arctostaphylos or prostrate rosemary on hot dry edges", "Osmanthus prefers drainage - Group 2 and 3 first. On Group 1, use Berberis aquifolium.", "3 shearings/yr down to 1", "The best payback of the hedge conversions, because shearing frequency drives the cost. Boxwood blight is the other risk: once it reaches a hedge, it can take the whole planting."], ["Thuja occidentalis", "'Emerald Green' privacy hedge", "Replace soon", "Shallow-rooted and increasingly drought-stressed in valley summers. Flagging, spider mites, Phytophthora, deer browse. Individual plants die and leave gaps that cannot be filled in kind.", "Calocedrus decurrens (incense cedar)", "Morella californica (shorter); Hesperocyparis arizonica on sharply drained sites only", "Incense cedar on Groups 2 and 3; wax myrtle on Group 1. Do NOT default to western redcedar - Thuja plicata is itself in drought decline across the valley.", "Shearing plus ongoing gap replacement, down to periodic thinning", "If plants are already dying one at a time, replacing the whole run once costs less than patching it every year."], ["Photinia x fraseri", "Red tip hedge", "Replace soon", "Entomosporium leaf spot is near-inevitable in our wet springs, and shearing makes it worse by forcing susceptible new growth. Fungicide cycles plus shearing means up to 4 visits/yr on a plant that keeps declining.", "Osmanthus x burkwoodii", "Morella californica; Arbutus unedo 'Compacta' (red stems, winter flowers and fruit)", "Osmanthus and Arbutus want drainage. Wax myrtle for Group 1.", "Up to 4 visits/yr down to 1, and spraying stops", "Leaf spot returns every wet spring. Replacing it ends a recurring failure rather than changing a healthy planting."], ["Betula pendula / papyrifera", "Specimen or clump birch", "Replace soon", "Bronze birch borer plus chronic summer drought stress. Aphid honeydew on cars and patios. Once crown dieback starts in the valley it does not reverse.", "Parrotia persica", "Quercus imbricaria (if space); Arbutus unedo 'Marina' multi-stem (evergreen); Acer griseum (not in Palette; needs more water)", "Parrotia works Groups 1 and 2, caution on 3. Bur or swamp white oak for wet Group 1 with room.", "Removal risk falls; pruning roughly halves", "No drought-tolerant tree has the same white bark. Choose the replacement for bark, structure and fall color instead."], ["Pyrus calleryana", "'Bradford' street/yard tree", "Replace soon", "Included bark at codominant unions causes structural failure at roughly 15-25 years, usually in an ice or wind event. Fireblight. Invasive seedling spread from fertile cultivar crosses.", "Parrotia persica", "Maackia amurensis (under wires); Quercus imbricaria (larger sites); Arbutus unedo 'Marina'", "Parrotia and Maackia are fine on Groups 1 and 2. Shingle oak on Groups 1 and 2 where there is room. Arbutus needs drainage: Groups 2 and 3 only. Maackia for small rooting volume.", "Structural pruning cycle replaces failure response", "Replacement rarely pays for itself in maintenance savings. The reason is timing: the tree will fail, and a planned removal is cheaper and safer than an emergency one."], ["Prunus cerasifera", "'Thundercloud' flowering plum", "Replace soon", "Short-lived at 20-25 years. Aphids, brown rot, bacterial canker, borers. Fruit litter and root suckering. Most valley specimens are already past their useful life.", "Cotinus coggygria 'Royal Purple'", "Parrotia persica; Maackia amurensis; Cercis canadensis 'Forest Pansy' (not in Palette; needs more water)", "Cotinus wants drainage - Group 2 and 3. Parrotia for Group 1.", "Ends aphid/fruit callbacks; pruning drops sharply", "Smokebush keeps the purple foliage that made the plum the choice, and it handles drought. Matching the look is what makes the change stick."], ["Fraxinus spp.", "Oregon, green and white ash", "Plan ahead", "EAB is confirmed in five northern Willamette Valley counties, as close as Salem. It is not confirmed in Lane County as of August 2026. Untreated ash will die once EAB arrives. Treated ash needs injection every 2-3 years while EAB is present. Eugene does not allow ash planting on public land.", "Decide per tree with the ash tool: treat, plant first, or replace. Replacements: Quercus bicolor (wet) / Quercus garryana (upland)", "Quercus macrocarpa; Malus fusca (wet sites, small spaces); Quercus imbricaria; Parrotia persica. Riparian sites: natives only (Malus fusca, Salix, Q. garryana).", "Swamp white oak is the strongest analog for the wet bottomland niche Oregon ash holds. Bur oak second. Garry oak on Group 3. Use Pacific crabapple between oaks to keep the oak share down.", "Treat: injection every 2-3 years. Replace: ends treatment and the risk of a dead tree.", "For one tree, treatment usually costs less than replacement over 15 years. Treat healthy, valuable trees before EAB arrives. For the rest, plant a successor now so there is shade when the ash comes out. Never let an untreated ash die near a house or road."]]};
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const money = n => '$' + Math.round(n).toLocaleString('en-US');
+const num = (el, d=0) => { const v = parseFloat(el.value); return isFinite(v) ? v : d; };
+
+/* ---------------- router ---------------- */
+const views = $$('[data-view]');
+function route(){
+  let [name, qs] = (location.hash.slice(1) || 'overview').split('?');
+  let anchor = null;
+  if (name.startsWith('framework-')) { anchor = name; name = 'framework'; }
+  const view = views.find(v => v.dataset.view === name);
+  if (!view) { location.replace('#overview'); return; }
+  views.forEach(v => v.hidden = v !== view);
+  $$('.rail a.nav').forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + name ? 'page' : 'false'));
+  const p = new URLSearchParams(qs || '');
+  if (name === 'species' && p.has('g')) { $('#sp-soil').value = p.get('g'); renderSpecies(); }
+  if (anchor) { document.getElementById(anchor)?.scrollIntoView(); }
+  else { window.scrollTo(0, 0); view.querySelector('h1')?.focus({preventScroll:true}); }
+  if (matchMedia('(max-width:860px)').matches) $('.rail a.nav[aria-current="page"]')?.scrollIntoView({block:'nearest', inline:'center'});
+}
+window.addEventListener('hashchange', route);
+
+/* ---------------- shared helpers ---------------- */
+const SOIL = {1:'Group 1', 2:'Group 2', 3:'Group 3'};
+const TIER_RANK = {A:0, B:1, C:2, Reject:3};
+const fitOf = (e, g) => e['g' + g];
+const sortName = (a, b) => a.com.localeCompare(b.com);
+function badge(t, cls){ return `<span class="badge ${esc(cls || t)}">${esc(t)}</span>`; }
+function mentions(text, e){
+  const t = text.toLowerCase();
+  const sci = e.sci.toLowerCase().replace(/\s+'.*'$/, '');
+  if (t.includes(sci)) return true;
+  const p = sci.split(' ');
+  if (p.length >= 2 && p[0] !== 'x') {
+    if (t.includes(p[0][0] + '. ' + p.slice(1).join(' '))) return true;
+  }
+  return false;
+}
+
+/* ---------------- convert ---------------- */
+const LEGACY = {
+  'Prunus laurocerasus':'English laurel hedge', 'Buxus sempervirens':'Boxwood', 'Thuja occidentalis':"Arborvitae ('Emerald Green')",
+  'Photinia x fraseri':'Photinia (red tip)', 'Betula pendula / papyrifera':'Birch', 'Pyrus calleryana':'Bradford pear',
+  'Prunus cerasifera':'Flowering plum', 'Fraxinus spp.':'Ash'
+};
+const CLASS_TXT = {
+  'Replace soon':'The plant is failing or unsafe. Replacing it is a question of when, not whether. A planned replacement costs less and is safer than waiting.',
+  'Optional':'The plant is healthy but costly to keep. The case rests on long-term maintenance cost, so it suits owners who plan to stay ten years or more.',
+  'Plan ahead':'The plant is healthy now, but a known threat is coming. Protect the trees worth protecting and plant successors for the rest.'
+};
+const CLASS_CSS = {'Replace soon':'alertc', 'Optional':'gleyc', 'Plan ahead':'amberc'};
+function initConvert(){
+  $('#cv-legacy').innerHTML = D.cross.map((r, i) => `<option value="${i}">${esc(LEGACY[r[0]] || r[0])}</option>`).join('');
+  ['#cv-legacy', '#cv-soil'].forEach(s => $(s).addEventListener('change', renderConvert));
+  renderConvert();
+}
+function renderConvert(){
+  const r = D.cross[+$('#cv-legacy').value], g = $('#cv-soil').value;
+  const isAsh = r[0].startsWith('Fraxinus');
+  const text = r[4] + ' ' + r[5];
+  const order = { Yes:0, Caution:1, No:2 };
+  const cands = D.palette.filter(e => mentions(text, e))
+    .map(e => ({ e, primary: mentions(r[4], e) }))
+    .sort((a, b) => (b.primary - a.primary) || (order[fitOf(a.e, g)] - order[fitOf(b.e, g)]));
+  const rows = cands.map(({ e, primary }) => `<tr><td><span class="sci">${esc(e.sci)}</span><br><span class="small muted">${esc(e.com)}${primary ? ', primary choice' : ''}</span></td><td>${badge(e.tier, e.tier + ' fill-' + e.tier)}</td><td>${badge(fitOf(e, g))}</td><td>${esc(e.wclass)}</td><td class="num">${esc(e.maxh)} ft</td></tr>`).join('');
+  const caution = cands.some(c => fitOf(c.e, g) === 'Caution') ? `<p class="small muted">Caution means the species needs drainage help on this soil: a raised berm or coarse backfill.</p>` : '';
+  $('#cv-out').innerHTML = `
+  <div class="panel ${r[2] === 'Replace soon' ? 'alert' : r[2] === 'Plan ahead' ? 'caution' : 'g1'}">
+    <p class="result-title">${esc(LEGACY[r[0]] || r[0])} ${badge(r[2], CLASS_CSS[r[2]])}</p>
+    <p>${esc(CLASS_TXT[r[2]] || '')}</p>
+    ${isAsh ? `<p><a class="btn" href="#ash">Open the ash decision tool</a></p>` : ''}
+  </div>
+  <dl class="facts">
+    <dt>Why it costs or fails</dt><dd>${esc(r[3])}</dd>
+    <dt>Replace with</dt><dd>${esc(r[4])}</dd>
+    <dt>Other options</dt><dd>${esc(r[5])}</dd>
+    <dt>Soil notes</dt><dd>${esc(r[6])}</dd>
+    <dt>Maintenance change</dt><dd>${esc(r[7])}</dd>
+    <dt>Worth knowing</dt><dd>${esc(r[8])}</dd>
+  </dl>
+  <h2>Candidates on ${SOIL[g]}</h2>
+  <div class="table-wrap"><table><thead><tr><th>Species</th><th>Tier</th><th>Fit</th><th>Water class</th><th class="num">Max height</th></tr></thead><tbody>${rows}</tbody></table></div>
+  ${caution}`;
+}
+
+/* ---------------- species ---------------- */
+function initSpecies(){
+  ['#sp-soil','#sp-height','#sp-water','#sp-search','#sp-caution','#sp-wires'].forEach(s => $(s).addEventListener('input', renderSpecies));
+  $$('.sp-tier').forEach(c => c.addEventListener('change', renderSpecies));
+  renderSpecies();
+}
+function renderSpecies(){
+  const g = $('#sp-soil').value, h = parseFloat($('#sp-height').value), w = $('#sp-water').value;
+  const q = $('#sp-search').value.trim().toLowerCase(), caut = $('#sp-caution').checked, wires = $('#sp-wires').checked;
+  const tiers = new Set($$('.sp-tier').filter(c => c.checked).map(c => c.value));
+  if (tiers.has('C')) tiers.add('Reject');
+  const list = D.palette.filter(e =>
+    tiers.has(e.tier) &&
+    (!g || fitOf(e, g) === 'Yes' || (caut && fitOf(e, g) === 'Caution')) &&
+    (!isFinite(h) || e.maxh <= h) &&
+    (!w || e.wclass === w) &&
+    (!wires || e.wires === 'Yes') &&
+    (!q || (e.sci + ' ' + e.com + ' ' + e.genus + ' ' + e.fam).toLowerCase().includes(q))
+  ).sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier] || sortName(a, b));
+  $('#sp-count').textContent = list.length ? `${list.length} species match.` : 'No species match. Remove a filter, or include "Caution" soil fits.';
+  $('#sp-list').innerHTML = list.map(e => `
+  <details>
+    <summary><span class="sp-head">
+      <span class="sp-name"><b>${esc(e.com)}</b><span class="sci small">${esc(e.sci)}</span></span>
+      <span>${badge(e.tier, e.tier + ' fill-' + e.tier)}</span>
+      <span class="fitchips">${[1,2,3].map(n => `<span class="chip ${esc(fitOf(e, n))}" title="Group ${n}: ${esc(fitOf(e, n))}">${n}</span>`).join('')}</span>
+      <span class="hw small">${esc(e.size)}</span>
+    </span></summary>
+    <div class="body"><dl class="facts">
+      <dt>Habit</dt><dd>${esc(e.habit)}</dd>
+      <dt>Cultivar or clone</dt><dd>${esc(e.cv)}</dd>
+      <dt>Summer drought</dt><dd>${esc(e.dr)}</dd>
+      <dt>Winter-wet clay</dt><dd>${esc(e.ww)}</dd>
+      <dt>Soil fit</dt><dd>Group 1: ${esc(e.g1)}. Group 2: ${esc(e.g2)}. Group 3: ${esc(e.g3)}.</dd>
+      <dt>Water class</dt><dd>${esc(e.wclass)}</dd>
+      <dt>Under wires</dt><dd>${esc(e.wires)}</dd>
+      <dt>Family</dt><dd>${esc(e.fam)}</dd>
+      <dt>Pests and disease</dt><dd>${esc(e.pest)}</dd>
+      <dt>Notes</dt><dd>${esc(e.notes)}</dd>
+      <dt>Source</dt><dd>${esc(e.source)}${e.review ? `. Review by ${esc(e.review)}.` : ''}</dd>
+    </dl></div>
+  </details>`).join('');
+}
+
+/* ---------------- ash ---------------- */
+const ASH_PATHS = {
+  now:  ['n-q1','e-1','n-r1'], gray: ['n-q1','e-2','n-r2'],
+  treat:['n-q1','e-3','n-q2','e-4','n-r3'], replace:['n-q1','e-3','n-q2','e-5','n-q3','e-6','n-r4'],
+  plant:['n-q1','e-3','n-q2','e-5','n-q3','e-7','n-r5']
+};
+const ASH_TXT = {
+  now:  ['Remove now', 'alert', 'More than half the canopy is gone. The damaged trunk cannot move insecticide, and dead ash turns brittle within one to two years. Use a lift or crane, not a climber.'],
+  gray: ['Gray zone: assess the structure', 'caution', 'Between 30 and 50 percent dieback. Treat only a high-value tree with sound structure. Otherwise plan the removal now, while it is still safe to climb.'],
+  treat:['Treat', 'g2', 'Healthy and high value. Inject every 2 to 3 years for as long as EAB is present. Treatment works best before the beetle arrives.'],
+  replace:['Remove and replace', 'caution', 'EAB signs on a tree that is not high value. Schedule a planned removal while it is safe to climb, and plant the replacement.'],
+  plant:['Plant first, remove later', 'g2', 'Healthy, but not worth long-term treatment. Plant the successor now in light. Remove the ash at 30 percent dieback, when EAB reaches Lane County, or when the successor gives shade.']
+};
+function initAsh(){
+  $$('[data-view="ash"] input, [data-view="ash"] select').forEach(el => { el.addEventListener('input', renderAsh); el.addEventListener('change', renderAsh); });
+  renderAsh();
+}
+function renderAsh(){
+  const dbh = num($('#ash-dbh'), 0), die = num($('#ash-die'), 0) / 100;
+  $('#ash-die-out').textContent = Math.round(die * 100) + '%';
+  const signs = $('input[name="ash-signs"]:checked').value === 'Y', value = $('#ash-value').value, site = $('#ash-site').value, target = $('#ash-target').checked;
+  let k = die > 0.5 ? 'now' : die >= 0.3 ? 'gray' : value === 'High' ? 'treat' : signs ? 'replace' : 'plant';
+  $$('#ash-flow .on').forEach(n => n.classList.remove('on'));
+  ASH_PATHS[k].forEach(id => document.getElementById(id).classList.add('on'));
+  const rep = site === 'Wet' ? 'Swamp white oak (Quercus bicolor) or Pacific crabapple (Malus fusca)'
+    : site === 'Riparian' ? 'Natives only: Pacific crabapple, native willows, Oregon white oak on drier edges'
+    : 'Oregon white oak (Quercus garryana) or bur oak (Q. macrocarpa)';
+  const P = { inj:num($('#p-inj')), int:Math.max(num($('#p-int'), 2), 0.5), rem:num($('#p-rem')), mult:num($('#p-mult'), 1), rep:num($('#p-rep')), hz:num($('#p-hz'), 15) };
+  const cycle = dbh * P.inj, cycles = Math.ceil(P.hz / P.int), treatHz = cycle * cycles;
+  const planned = dbh * P.rem + P.rep, emerg = dbh * P.rem * P.mult + P.rep;
+  const [title, tone, text] = ASH_TXT[k];
+  $('#ash-out').innerHTML = `
+  <div class="panel ${tone}">
+    <p class="result-title">${title}${k === 'now' && target ? ': target at risk' : ''}</p>
+    <p>${text}${k === 'now' && target ? ' This tree is near a target. Schedule it first.' : ''}</p>
+    <p><b>${k === 'treat' ? 'Successor, if there is space' : 'Replace with'}:</b> ${esc(rep)}.</p>
+  </div>
+  ${dbh > 0 ? `<table><thead><tr><th>Option for this ${dbh} in tree</th><th class="num">Cost</th></tr></thead><tbody>
+    <tr><td>Treatment, one injection</td><td class="num">${money(cycle)}</td></tr>
+    <tr><td>Treatment over ${P.hz} years (${cycles} injections)</td><td class="num">${money(treatHz)}</td></tr>
+    <tr><td>Planned removal and replacement</td><td class="num">${money(planned)}</td></tr>
+    <tr><td>Emergency removal and replacement, after it dies</td><td class="num">${money(emerg)}</td></tr>
+  </tbody></table>
+  <p class="small muted">Over ${P.hz} years, ${treatHz < planned ? 'treatment costs less than replacement' : 'replacement costs less than treatment'}. Waiting until the tree dies adds ${money(emerg - planned)}. Example prices; change them under "Prices used in the costs".</p>` : ''}`;
+}
+
+/* ---------------- watering ---------------- */
+const INTERVALS = { 1:[10,21,30], 2:[7,14,28], 3:[5,10,21] };
+const SEASON = 110;
+const plantable = D.palette.filter(e => e.tier === 'A' || e.tier === 'B').sort(sortName);
+function rowHTML(sci = '', by = 'gal', size = 5, count = 1){
+  return `<div class="prow">
+    <label class="field"><span>Plant</span><select class="w-sp">${plantable.map(e => `<option value="${esc(e.sci)}"${e.sci === sci ? ' selected' : ''}>${esc(e.com)} (${esc(e.sci)})</option>`).join('')}</select></label>
+    <label class="field"><span>Measured by</span><select class="w-by"><option value="gal"${by === 'gal' ? ' selected' : ''}>Container, gallons</option><option value="cal"${by === 'cal' ? ' selected' : ''}>Trunk caliper, inches</option></select></label>
+    <label class="field"><span>Size</span><input class="w-size" type="number" min="0" step="0.5" value="${size}"></label>
+    <label class="field"><span>Count</span><input class="w-count" type="number" min="0" value="${count}"></label>
+    <button type="button" class="btn quiet small w-del">Remove</button></div>`;
+}
+function initWater(){
+  $('#w-rows').innerHTML = rowHTML('Morella californica', 'gal', 5, 25);
+  $('#w-add').addEventListener('click', () => { $('#w-rows').insertAdjacentHTML('beforeend', rowHTML(plantable[0].sci, 'gal', 1, 1)); renderWater(); });
+  $('#w-rows').addEventListener('click', e => { if (e.target.classList.contains('w-del')) { e.target.closest('.prow').remove(); renderWater(); } });
+  $$('[data-view="water"]')[0].addEventListener('input', renderWater);
+  $$('[data-view="water"]')[0].addEventListener('change', renderWater);
+  $('#w-print').addEventListener('click', () => window.print());
+  renderWater();
+}
+function renderWater(){
+  const g = $('#w-soil').value, base = INTERVALS[g];
+  const rows = $$('#w-rows .prow').map(tr => {
+    const e = D.palette.find(p => p.sci === tr.querySelector('.w-sp').value);
+    const by = tr.querySelector('.w-by').value, size = num(tr.querySelector('.w-size')), count = num(tr.querySelector('.w-count'));
+    const gal = by === 'cal' ? size * 10 : size;
+    const dry = e.wclass === 'Drought-adapted';
+    const iv = base.map((d, i) => dry ? (i < 2 ? Math.round(d * 1.5) : 0) : d);
+    return { e, gal, count, dry, iv, ev: iv.map(d => d ? Math.ceil(SEASON / d) : 0) };
+  }).filter(r => r.count > 0);
+  const d = $('#w-date').value ? new Date($('#w-date').value + 'T12:00') : null;
+  const first = d ? d.getFullYear() + (d.getMonth() >= 9 ? 1 : 0) : null;
+  const yrs = [0,1,2].map(i => first ? 'Summer ' + (first + i) : ['First','Second','Third'][i] + ' summer');
+  const stop = first ? new Date(first + 2, 9, 15).toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'}) : 'October 15 of the third summer';
+  const who = $('#w-who').value, client = $('#w-client').value.trim();
+  $('#w-plan').innerHTML = `
+    <h3>Watering plan for your new planting</h3>
+    <p>${client ? esc(client) + '. ' : ''}${d ? 'Planted ' + d.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'}) + '. ' : ''}Watering by: ${esc(who === 'Owner' ? 'owner' : 'hired contractor')}. Keep this page where you will see it all summer.</p>
+    ${rows.length ? `<div class="table-wrap"><table><thead><tr><th>Plant</th><th class="num">Gallons each time</th>${yrs.map(y => `<th class="num">${y}: water every</th>`).join('')}</tr></thead><tbody>
+      ${rows.map(r => `<tr><td>${esc(r.e.com)}${r.count ? ` <span class="muted small">(${r.count})</span>` : ''}</td><td class="num">${r.gal}</td>${r.iv.map(x => `<td class="num">${x ? x + ' days' : 'no water'}</td>`).join('')}</tr>`).join('')}
+    </tbody></table></div>` : '<p>Add a plant above to build the plan.</p>'}
+    <p><b>Season:</b> June 15 to October 15 each summer. <b>Stop all watering after ${esc(stop)}.</b></p>
+    <ol class="steps">
+      <li>Water slowly at the base: drip ring, soaker, watering bag, or a hose on a trickle. Do not use a sprinkler.</li>
+      <li>Water deeply and less often. Short, frequent watering keeps roots shallow.</li>
+      <li>Keep mulch 3–4 in deep and pulled back from the trunk.</li>
+      <li>Heat wave, three or more days above 100 °F: water every plant once more, early morning or evening.</li>
+      <li>"No water" means none. Those plants are harmed by summer water after the second year.</li>
+      <li>If leaves wilt, brown or drop outside of fall, have an ISA Certified Arborist look at it.</li>
+    </ol>`;
+  const visits = [0,1,2].map(i => Math.max(0, ...rows.map(r => r.ev[i])));
+  const gallons = [0,1,2].map(i => rows.reduce((s, r) => s + r.gal * r.count * r.ev[i], 0));
+  const hrs = num($('#w-hrs')), rate = num($('#w-rate'));
+  $('#w-cost').innerHTML = `<table><thead><tr><th></th>${yrs.map(y => `<th class="num">${y}</th>`).join('')}<th class="num">Total</th></tr></thead><tbody>
+    <tr><td>Site visits</td>${visits.map(v => `<td class="num">${v}</td>`).join('')}<td class="num">${visits.reduce((a, b) => a + b, 0)}</td></tr>
+    <tr><td>Gallons</td>${gallons.map(v => `<td class="num">${v.toLocaleString('en-US')}</td>`).join('')}<td class="num">${gallons.reduce((a, b) => a + b, 0).toLocaleString('en-US')}</td></tr>
+    <tr><td><b>Cost</b></td>${visits.map(v => `<td class="num">${money(v * hrs * rate)}</td>`).join('')}<td class="num"><b>${money(visits.reduce((a, b) => a + b, 0) * hrs * rate)}</b></td></tr>
+  </tbody></table><p class="small muted">Visits are counted once per site. Drought-adapted plants are watered on the longer cycle during the same visits.</p>`;
+}
+
+/* ---------------- hedgerow ---------------- */
+function renderHedge(){
+  const len = num($('#h-len')), rows = Math.max(1, Math.round(num($('#h-rows'), 1))), sp = Math.max(1, num($('#h-sp'), 6)), rsp = num($('#h-rsp'));
+  const per = Math.ceil(len / sp) + 1, tot = per * rows, width = (rows - 1) * rsp + sp;
+  $('#h-out').innerHTML = `<dl class="facts">
+    <dt>Plants per row</dt><dd>${per}</dd>
+    <dt>Total plants</dt><dd><b>${tot}</b></dd>
+    <dt>Width needed</dt><dd>about ${width} ft${width < 8 ? '. Below 8 ft, plant a single mixed row instead.' : ''}</dd>
+    <dt>Rose family, at most</dt><dd>${Math.floor(tot * 0.3)} plants (30%)</dd>
+    <dt>Tier B, at most</dt><dd>${Math.floor(tot * 0.1)} plants (10%)</dd>
+    <dt>Evergreens for winter screen</dt><dd>${Math.ceil(per / 3)} in the screening row, at least</dd>
+  </dl>`;
+}
+
+/* ---------------- workflows ---------------- */
+const WF = [
+  ['1. Assess the site', ['Name the plant you want to replace and how much of it there is: length and width, or number of trees.', 'Call the soil group. If unsure, dig 18 in and fill the hole with water. Not drained in an hour means Group 1.', 'Note sun, slope, water access, overhead wires and deer.', 'Take photos for your record.']],
+  ['2. Decide: replace or keep', ['Replace soon if the plant is failing or unsafe.', 'Plan ahead if a known threat is coming, such as emerald ash borer.', 'Replacement is optional if the plant is healthy but costly to keep.', 'Otherwise, keep it.'], 'A healthy tree that causes no problems is usually worth keeping.'],
+  ['3. Choose species', ['Find the plant in the replacement tool. Read the soil notes.', 'Filter the species list by soil group. Check tier, height, overhead wires and water class.', 'If the site is 8 ft wide or more, consider a mixed hedgerow.', 'Keep Tier B species to 10% of the planting or less.', 'Keep any one species to 10%, genus to 20% and family to 30% across a larger site.']],
+  ['4. Plant', ['Plant in fall, October to March. Fall is best: roots grow through the winter rain.', 'Mulch 3–4 in deep, pulled back from the trunk.', 'Protect young trunks from deer and rodents where needed.']],
+  ['5. Water for three summers', ['Build the watering plan and print it.', 'Water deeply and less often, June 15 to October 15.', 'Never put drought-adapted plants on a shared irrigation zone.', 'Stop after the third summer.']],
+  ['6. Check each year', ['Score each planting 1 to 5: 5 is vigorous, 1 is failing or dead.', 'Count what is still alive.', 'Record the cause of any loss. Transplant shock in year one is not a species failure.']],
+  ['7. Learn from the results', ['After three summers, compare survival by species and soil group.', 'Trust species that keep doing well. Drop species that keep failing.', 'Share what you learn with your local extension office or arborist.']],
+  ['Ash trees', ['Measure the trunk diameter, estimate canopy dieback, and check for EAB signs.', 'Run each tree through the ash tool.', 'Treat healthy, valuable trees before EAB arrives. Plant successors for the rest.', 'Retreat every 2 to 3 years for as long as EAB is present.', 'Report suspected EAB in Lane County. Do not move the wood.']]
+];
+function renderWF(){
+  $('#wf-list').innerHTML = WF.map(([t, steps, rule], i) => `<details${i === 0 ? ' open' : ''}><summary><b>${esc(t)}</b></summary><div class="body">
+    <ol class="steps">${steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol>${rule ? `<p><b>${esc(rule)}</b></p>` : ''}</div></details>`).join('');
+}
+
+/* ---------------- matrix ---------------- */
+function renderMatrix(){
+  const levels = ['Very Low','Low','Moderate','High','Very High'];
+  let html = `<div class="yaxis">Winter-wet clay tolerance</div>`;
+  for (let y = 4; y >= 0; y--) {
+    html += `<div class="ylab">${levels[y]}</div>`;
+    for (let x = 0; x < 5; x++) {
+      const items = D.palette.filter(e => e.dr === levels[x] && e.ww === levels[y]).sort(sortName);
+      html += `<div class="cell">${items.map(e => `<span class="mchip ${esc(e.tier)}" title="${esc(e.sci)}, Tier ${esc(e.tier)}">${esc(e.com)}</span>`).join('')}</div>`;
+    }
+  }
+  html += `<div></div><div></div>${levels.map(l => `<div class="xlab">${l}</div>`).join('')}<div></div><div></div><div class="xaxis">Summer drought tolerance</div>`;
+  $('#matrix').innerHTML = html;
+}
+
+/* ---------------- start ---------------- */
+initConvert(); initSpecies(); initAsh(); initWater(); renderWF(); renderMatrix();
+['#h-len','#h-rows','#h-sp','#h-rsp'].forEach(s => $(s).addEventListener('input', renderHedge));
+renderHedge();
+route();
+</script>
+</body>
+</html>
