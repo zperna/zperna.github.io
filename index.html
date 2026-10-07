@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zachary, Field GIS &amp; Natural Resources</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #E4DCC8;
+    --paper-dark: #C9BEA0;
+    --ink: #23261F;
+    --moss: #38472F;
+    --moss-light: #4F6140;
+    --flag: #F2600C;
+    --bark: #6B4F35;
+    --line: rgba(35,38,31,0.18);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection{ background: var(--flag); color: var(--paper); }
+
+  a{ color: inherit; }
+
+  .wrap{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .contours{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 28px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .brand{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+  }
+  .brand span{ color: var(--flag); }
+  nav ul{
+    display: flex;
+    gap: 26px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  nav a{
+    text-decoration: none;
+    color: var(--moss);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  nav a:hover{ color: var(--flag); border-color: var(--flag); }
+
+  .hero{
+    position: relative;
+    overflow: hidden;
+    padding: 96px 0 84px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-inner{ position: relative; z-index: 1; }
+  .eyebrow{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .eyebrow::before{
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--bark);
+    display: inline-block;
+  }
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 5.5vw, 4.1rem);
+    line-height: 1.02;
+    margin: 0 0 24px;
+    max-width: 15ch;
+  }
+  h1 em{
+    font-style: italic;
+    font-weight: 400;
+    color: var(--moss);
+  }
+  .hero-sub{
+    max-width: 52ch;
+    font-size: 1.08rem;
+    color: #3a3d33;
+    margin-bottom: 34px;
+  }
+  .hero-meta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .stamp{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.03em;
+    border: 1px solid var(--bark);
+    color: var(--bark);
+    padding: 5px 10px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.25);
+  }
+
+  section{ padding: 76px 0; }
+  .section-head{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 18px;
+  }
+  .section-head h2{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin: 0;
+  }
+  .section-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    color: var(--bark);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .about-grid{
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+  }
+  .about-grid p{ margin: 0 0 16px; max-width: 58ch; }
+  .credentials{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    border-left: 2px solid var(--flag);
+    padding-left: 18px;
+  }
+  .credentials div{ margin-bottom: 12px; }
+  .credentials b{ display:block; color: var(--moss); font-family:'Work Sans', sans-serif; font-weight:600; font-size:0.88rem; margin-bottom: 2px;}
+
+  .tags{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+  }
+  .tag{
+    position: relative;
+    background: var(--paper-dark);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 26px 24px 24px;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+  .tag:hover{
+    transform: translateY(-4px) rotate(-0.4deg);
+    box-shadow: 0 14px 26px -14px rgba(35,38,31,0.4);
+  }
+  .tag::before{
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 22px;
+    width: 12px;
+    height: 12px;
+    background: var(--paper);
+    border: 1px solid var(--bark);
+    border-radius: 50%;
+  }
+  .tag-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .tag-id{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--flag);
+    letter-spacing: 0.04em;
+  }
+  .tag h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.28rem;
+    margin: 0 0 10px;
+    line-height: 1.15;
+  }
+  .tag p{
+    margin: 0 0 16px;
+    font-size: 0.95rem;
+    color: #3a3d33;
+  }
+  .tag-meta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 16px;
+  }
+  .pill{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    color: var(--moss);
+  }
+  .tag-links{
+    display: flex;
+    gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+  }
+  .tag-links a{
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--bark);
+    padding-bottom: 1px;
+  }
+  .tag-links a:hover{ color: var(--flag); border-color: var(--flag); }
+
+  .belt{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .belt span{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    padding: 8px 14px;
+    background: var(--moss);
+    color: var(--paper);
+    border-radius: 2px;
+  }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 44px 0 60px;
+  }
+  .foot-inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  footer h2{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin: 0 0 10px;
+  }
+  .foot-links{
+    display: flex;
+    gap: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+  }
+  .foot-links a{ text-decoration: none; border-bottom: 1px solid var(--bark); }
+  .foot-links a:hover{ color: var(--flag); border-color: var(--flag); }
+  .fine{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--bark);
+    margin-top: 30px;
+  }
+
+  .plate{
+    background: var(--paper-dark);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .plate img{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .plate-cap{
+    padding: 18px 22px 20px;
+    border-top: 1px solid var(--line);
+  }
+  .plate-cap h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0 0 6px;
+  }
+  .plate-cap p{
+    margin: 0 0 10px;
+    font-size: 0.92rem;
+    color: #3a3d33;
+    max-width: 62ch;
+  }
+  .plate-links{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+  }
+  .plate-links a{
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--bark);
+    padding-bottom: 1px;
+  }
+  .plate-links a:hover{ color: var(--flag); border-color: var(--flag); }
+
+  @media (max-width: 760px){
+    .about-grid{ grid-template-columns: 1fr; }
+    .tags{ grid-template-columns: 1fr; }
+    nav ul{ gap: 8px 16px; flex-wrap: wrap; }
+    .nav-inner{ flex-direction: column; gap: 10px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="brand">zachary perna<span>.</span>gis</div>
+    <nav>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#cartography">Cartography</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Toolkit</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <svg class="contours" viewBox="0 0 1080 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#6B4F35" stroke-width="1">
+      <path d="M-40 60 C 180 10, 320 110, 520 70 S 900 10, 1120 90" opacity="0.5"/>
+      <path d="M-40 110 C 200 60, 300 160, 540 120 S 880 60, 1120 140" opacity="0.45"/>
+      <path d="M-40 160 C 220 100, 340 210, 560 170 S 860 110, 1120 190" opacity="0.4"/>
+      <path d="M-40 210 C 240 150, 360 260, 580 220 S 840 160, 1120 240" opacity="0.35"/>
+      <path d="M-40 260 C 260 200, 380 310, 600 270 S 820 210, 1120 290" opacity="0.3"/>
+      <path d="M-40 310 C 280 250, 400 360, 620 320 S 800 260, 1120 340" opacity="0.25"/>
+      <path d="M-40 360 C 300 300, 420 410, 640 370 S 780 310, 1120 390" opacity="0.2"/>
+      <path d="M-40 410 C 320 350, 440 460, 660 420 S 760 360, 1120 440" opacity="0.15"/>
+    </g>
+  </svg>
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Eugene, Oregon &nbsp;·&nbsp; Field &amp; Desk</div>
+    <h1>Canopy, community, cartography,<br><em> consensus..</em></h1>
+    <p class="hero-sub">I'm Zachary. I'm an urban forestry professional and student of Natural Resource Management. I bring field expertise to spatial analysis: canopy surveys, disease mapping, terrain data, and GIS work. I hope to use these tools to connect communities to their landscapes. Based in the Willamette Valley.</p>
+    <div class="hero-meta">
+      <span class="stamp">ISA Certified Arborist</span>
+      <span class="stamp">B.S. Natural Resources, OSU</span>
+      <span class="stamp">GIS Certificate, Lane CC</span>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="section-head" style="border:none; padding-bottom:0; margin-bottom:22px;">
+        <h2>About</h2>
+      </div>
+      <p>I climb trees and help manage Eugene's urban canopy for a living. I'm in pursuit of higher education at Oregon State University studying Natural Resources and Geography. My GIS work begins with questions from the field. Where is root disease spreading? Where is canopy cover missing in communities that need it most? I use GIS as a tool to answer these questions, but my work starts in the field, primarily within the urban canopy and wildland interface.</p>
+      <p>I'm currently in an accelerated Master of Natural Resources program at Oregon State finishing my B.S. and MNR in tandem. My capstone proposal uses lichen density as an air quality proxy. I'm hoping to flag priority sites for tree planting through an environmental justice lens.</p>
+      <p>The throughline to my pursuits is people. Trees and plants help make up the natural infrastructure of our lives and landscapes but are often an afterthought in community planning and participation. I want my work to help change that: surfacing where canopy is missing, where risk is concentrated, and where a planting decision now helps a neighborhood build future resilience. Good data should help people understand and shape the landscape they live in. Good science should be communicable to all and not gatekept by technical jargon. </p>
+    </div>
+    <div class="credentials">
+      <div><b>Role</b>Crew Lead, Sperry Tree Care, since Feb 2022</div>
+      <div><b>Volunteer</b>Tree Crew Supervisor, Oregon Country Fair</div>
+      <div><b>Education</b>B.S. Natural Resources (Landscape Analysis), MNR in progress, Oregon State University. 3.9 GPA</div>
+      <div><b>Certificate</b>Geographic Information Science, Lane Community College</div>
+      <div><b>Certification</b>ISA Certified Arborist, ISA Wildfire Risk Reduction Qualification</div>
+      <div><b>Scholarship</b>Ford Opportunity Grant recipient, Vance P. and Dorothy D. Shugart Scholarship, George Robert Leavengood Scholarship, Finley Academic Excellence Scholarship</div>
+    </div>
+  </div>
+</section>
+
+<section id="work" style="background: rgba(107,79,53,0.06); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected work</h2>
+    
+    </div>
+    <div class="tags">
+
+      <div class="tag">
+        <div class="tag-row">
+        </div>
+        <h3>ProjectHailshade</h3>
+        <p>An ArcPy-based workflow that pulls LiDAR elevation data from the DOGAMI REST service, clips it to an area of interest, and generates multi-layer hillshade products. Built to cut the manual work out of terrain analysis.</p>
+        <div class="tag-meta">
+          <span class="pill">ArcPy</span>
+          <span class="pill">LiDAR</span>
+          <span class="pill">Automation</span>
+        </div>
+        <div class="tag-links">
+          <a href="https://github.com/zperna/ProjectHailshade" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+
+      <div class="tag">
+        <div class="tag-row">
+        </div>
+        <h3>Tree Pathogen Spread Model</h3>
+        <p>A generalizable risk-flagging prototype for modeling multi-pathogen spread across a tree population, built in Python. Meant to eventually run on tree inventory data from the field, starting with Sperry and Oregon Country Fair.</p>
+        <div class="tag-meta">
+          <span class="pill">Python</span>
+          <span class="pill">Disease Modeling</span>
+          <span class="pill">Prototype</span>
+        </div>
+        <div class="tag-links">
+          <a href="https://github.com/zperna/PathogenSpread" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+
+      <div class="tag">
+        <div class="tag-row">
+        </div>
+        <h3>Holistic Tree Removal &amp; Replacement</h3>
+        <p>An interactive field guide that treats tree and hedge removal and replacement as one process: assessing the tree and site, deciding whether to retain or remove, matching replacements to southern Willamette Valley soils, and planning establishment and monitoring. Includes an ash and emerald ash borer decision tool and 48 species rated for drought and winter-saturated clay.</p>
+        <div class="tag-meta">
+          <span class="pill">Urban Forestry</span>
+          <span class="pill">Climate Adaptation</span>
+          <span class="pill">Decision Support</span>
+        </div>
+        <div class="tag-links">
+          <a href="conversions/">Open the guide</a>
+        </div>
+      </div>
+
+      <div class="tag">
+        <div class="tag-row">
+        </div>
+        <h3>Lichen Canopy &amp; Air Quality Survey</h3>
+        <p>MNR capstone project. Using canopy access as a climbing arborist to collect lichen presence and density data across Eugene, then linking it to air quality indicators through a GIS-based environmental justice framework to target planting sites in underserved neighborhoods.</p>
+        <div class="tag-meta">
+          <span class="pill">Field Survey</span>
+          <span class="pill">Environmental Justice</span>
+          <span class="pill">2026–2028</span>
+        </div>
+        <div class="tag-links">
+          <a href="https://arcg.is/1TXb102" target="_blank" rel="noopener">StoryMap ↗</a>
+        </div>
+      </div>
+
+      <div class="tag">
+        <div class="tag-row">
+        </div>
+        <h3>Climate &amp; Census Data Analysis</h3>
+        <p>Coursework from GEOG 562: pulling Daymet climate data and Census ACS demographic data through their APIs in Jupyter notebooks, and joining them for spatial analysis using GeoPandas and rasterio.</p>
+        <div class="tag-meta">
+          <span class="pill">Python</span>
+          <span class="pill">Daymet API</span>
+          <span class="pill">Census ACS</span>
+        </div>
+        <div class="tag-links">
+          <a href="https://github.com/zperna/GEOG562_Lab5" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+
+      <div class="tag">
+        <div class="tag-row">
+        </div>
+        <h3>Oak Root Disease &amp; Mediterranean Oak Borer</h3>
+        <p>Undergraduate research assistant on a Forest Engineering, Resources &amp; Management study asking whether existing root disease in Oregon white oaks makes them more attractive to the invasive Mediterranean oak borer. Plot surveys, tree health assessments, sonic tomography, and wood sampling across Willamette Valley sites.</p>
+        <div class="tag-meta">
+          <span class="pill">Field Research</span>
+          <span class="pill">Plant Pathology</span>
+          <span class="pill">Willamette Valley</span>
+        </div>
+        <div class="tag-links">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="cartography">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Cartography</h2>
+      <span class="section-tag">maps I've drawn</span>
+    </div>
+    <div class="plate">
+      <img src="img/canopy-height-ocf.jpg" alt="Canopy height map of Oregon Country Fair property in Veneta, Oregon, with inset maps showing flood hazard, historic vegetation, and modeled land cover.">
+      <div class="plate-cap">
+        <h3>Canopy Height at Oregon Country Fair</h3>
+        <p>A tree canopy height model built from LiDAR-derived elevation data across the 560-acre Oregon Country Fair property, paired with inset maps on flood hazard, historic 1930s vegetation, hydric soils, and modeled current land cover. Made for the property I help manage as Tree Crew Supervisor.</p>
+      </div>
+    </div>
+
+    <div class="plate" style="margin-top: 26px;">
+      <img src="img/lane-county-watersheds.jpg" alt="Lane County watershed boundary map showing Alsea, Siuslaw, Siltcoos, Upper Willamette, McKenzie, Middle Fork Willamette, Coast Fork Willamette, and North Umpqua watersheds over hillshade relief.">
+      <div class="plate-cap">
+        <h3>Lane County Watershed Boundaries</h3>
+        <p>Made pro bono to support public understanding of Oregon Measure 20-373, a Lane County ballot measure on watershed rights. Watershed boundaries and place labels set over custom hillshade relief.</p>
+        <div class="plate-links">
+          <a href="https://www.protectlanecountywatersheds.org/" target="_blank" rel="noopener">Protect Lane County Watersheds ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Toolkit</h2>
+      
+    </div>
+    <div class="belt">
+      <span>ISA Tree Risk Assessment</span>
+      <span>Field Data Collection</span>
+      <span>QGIS</span>
+      <span>ArcGIS Pro</span>
+      <span>GeoPandas</span>
+      <span>Rasterio</span>
+      <span>Python</span>
+      <span>ArcPy</span>
+      <span>Git / GitHub</span>
+      <span>LiDAR Processing</span>
+      <span>AI For Geospatial Workflows</span> 
+      <span>Communication</span>
+      <span>Consensus Building</span>
+      <span>Critical Thinking</span>
+      <span>Beginner's Mind</span>
+      <span>Systems Thinking</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>
+        <h2>Contact Me</h2>
+        <div class="foot-links">
+          <a href="mailto:pernaz@oregonstate.edu">Email</a>
+          <a href="https://github.com/zperna" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/zachary-perna-b715aa376" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="fine">Eugene, Oregon, updated 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
