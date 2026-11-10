@@ -266,7 +266,7 @@ figcaption{font-size:.88rem;color:var(--muted);margin-top:8px;max-width:70ch}
     <div>
       <h1 tabindex="-1">A holistic approach to tree removal and replacement in the southern Willamette Valley</h1>
       <p class="lede">Tree removal is a single step in urban canopy succession. This guide treats removal decisions, replanting choices, and follow-up care each as a part of a single process. It highlights the importance of maintaining urban canopy and favoring resilient, low-maintenance planting.</p>
-      <p>Replanting starts in the soil. Generally, Southern Willamette Valley soils are saturated from November to April and dry from June to October. Winter saturation is as much a cause for plant losses as summer drought. Every species in this guide is resilient for both of those conditions.</p>
+      <p>Replanting starts in the soil. Generally, Southern Willamette Valley soils are saturated from November to April and dry from June to October. Winter saturation is as much a cause for plant losses as summer drought. Every species in this guide is rated for both of those conditions.</p>
       <p class="muted small">Choose a soil group to see the species that fit it, or <a href="#soil">look up the soil at a site</a>.</p>
     </div>
     <ul class="profiles">
@@ -318,7 +318,7 @@ figcaption{font-size:.88rem;color:var(--muted);margin-top:8px;max-width:70ch}
     <dt>Neighboring trees</dt><dd>Root zones and canopy of the trees that stay. Removal work should be a careful process as well.</dd>
     <dt>Removed material</dt><dd>Wood, chips and stumps. Reuse chips as mulch where possible, and follow quarantine rules for ash.</dd>
     <dt>The replacement</dt><dd>Species matched to the soil, the space and the future climate, with diversity across the site.</dd>
-    <dt>Time</dt><dd>Canopy continuity, structural pruning while young, watering during establishment, and annual monitoring after that.</dd>
+    <dt>Time</dt><dd>Canopy continuity, structural pruning while young, watering during establishment, and monitoring where possible.</dd>
   </dl>
 
   <h2>Tools in this guide</h2>
@@ -343,7 +343,7 @@ figcaption{font-size:.88rem;color:var(--muted);margin-top:8px;max-width:70ch}
   </ol>
 
   <h2>Structural pruning while young</h2>
-  <p>Many defects in older trees can be prevented with simple pruning in a trees early years. Trees in open landscapes grow broad crowns, heavy lower limbs and sometimes several stems, so they are more prone to defects than forest trees. Waiting to prune can mean larger cuts in the future or weak branch unions that fail. A replacement planted to last for decades is worth some early attention.</p>
+  <p>Many defects in older trees can be prevented with simple pruning in a tree's early years. Trees in open landscapes grow broad crowns, heavy lower limbs and sometimes several stems, so they are more prone to defects than forest trees. Waiting to prune can mean larger cuts in the future or weak branch unions that fail. A replacement planted to last for decades is worth some early attention.</p>
   <ol class="steps">
     <li><b>Check the structure at planting.</b> Start by checking the nursery stock for ideal specimens. Remove dead or broken branches. Guides differ on how much to prune at planting, so keep early cuts small.</li>
     <li><b>Do the main structural pruning from year two or three.</b> Then check the tree regularly. Some species need pruning every two to three years for the first 10 to 15 years.</li>
@@ -598,7 +598,7 @@ figcaption{font-size:.88rem;color:var(--muted);margin-top:8px;max-width:70ch}
     <label class="field"><span>Length (ft)</span><input id="h-len" type="number" min="1" value="100"></label>
     <label class="field"><span>Rows</span><input id="h-rows" type="number" min="1" max="6" value="2"></label>
     <label class="field"><span>Spacing in the row (ft)</span><input id="h-sp" type="number" min="2" value="6"><small>Guide: 6–8 ft. Use 4–6 ft for a faster screen.</small></label>
-    <label class="field"><span>Spacing between rows (ft)</span><input id="h-rsp" type="number" min="2" value="8"><small>Guide: 8–10 ft.</small></label>
+    <label class="field"><span>Spacing between rows (ft)</span><input id="h-rsp" type="number" min="2" value="8"><small>Guide: 8–10 ft. For the narrow two-row template, use 3–4 ft and stagger the rows.</small></label>
   </div>
   <div id="h-out" class="panel" aria-live="polite"></div>
 
@@ -742,7 +742,7 @@ figcaption{font-size:.88rem;color:var(--muted);margin-top:8px;max-width:70ch}
       <tr><td>Boxwood hedge, 50 ft</td><td class="num">about 5 years</td><td>Shearing frequency, plus blight risk</td></tr>
       <tr><td>English laurel hedge, 100 ft</td><td class="num">about 8 years</td><td>The 15-year cost of shearing</td></tr>
       <tr><td>Bradford pear, one tree</td><td class="num">about 30 years</td><td>Timing and safety, not savings</td></tr>
-      <tr><td>Healthy ash, one tree</td><td class="num">over 50 years</td><td>Treat it instead; it is cheaper and keeps the canopy</td></tr>
+      <tr><td>Healthy ash, one tree</td><td class="num">over 50 years</td><td>Treat a high-value tree instead; it is cheaper and keeps the canopy</td></tr>
     </tbody>
   </table>
 </section>
@@ -950,7 +950,7 @@ const ASH_TXT = {
   gray: ['Assess structure before deciding', 'caution', 'Between 30 and 50 percent dieback. Treat only a high-value tree with sound structure. Otherwise plan the removal now, while it is still safe to climb.'],
   treat:['Treat', 'g2', 'Healthy and high value. Inject every 2 to 3 years for as long as EAB is present. Treatment works best before the beetle arrives.'],
   replace:['Remove and replace', 'caution', 'EAB signs on a tree that is not high value. Schedule a planned removal while it is safe to climb, and plant the replacement.'],
-  plant:['Plant first, remove later', 'g2', 'Healthy, but not worth long-term treatment. Plant the successor now in light. Remove the ash at 30 percent dieback, when EAB reaches Lane County, or when the successor gives shade.']
+  plant:['Plant first, remove later', 'g2', 'Healthy, but not a high-value tree. Treatment has no end date, so a successor is the better long-term plan. Plant the successor now in light. Remove the ash at 30 percent dieback, when EAB reaches Lane County, or when the successor gives shade.']
 };
 function initAsh(){
   $$('[data-view="ash"] input, [data-view="ash"] select').forEach(el => { el.addEventListener('input', renderAsh); el.addEventListener('change', renderAsh); });
@@ -982,7 +982,7 @@ function renderAsh(){
     <tr><td>Planned removal and replacement</td><td class="num">${money(planned)}</td></tr>
     <tr><td>Emergency removal and replacement, after it dies</td><td class="num">${money(emerg)}</td></tr>
   </tbody></table>
-  <p class="small muted">Over ${P.hz} years, ${treatHz < planned ? 'treatment costs less than replacement' : 'replacement costs less than treatment'}. Waiting until the tree dies adds ${money(emerg - planned)}. Example prices; change them under "Cost assumptions".</p>` : ''}`;
+  <p class="small muted">Over ${P.hz} years, ${treatHz < planned ? 'treatment costs less than replacement, but it must continue for as long as EAB is present' : 'replacement costs less than treatment'}. Waiting until the tree dies adds ${money(emerg - planned)}. Example prices; change them under "Cost assumptions".</p>` : ''}`;
 }
 
 /* ---------------- watering ---------------- */
